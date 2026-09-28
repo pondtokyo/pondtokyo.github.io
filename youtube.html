@@ -142,14 +142,33 @@
       .wrap { padding: 6vh 5vw; }
       header { margin-bottom: 6vh; }
       .mix-grid { gap: 28px; }
+      .filter-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+      }
+      .search-box {
+        width: 100%;
+      }
+      .search-input {
+        width: 100%;
+      }
     }
+    .filter-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px 28px;
+      margin-bottom: 8vh;
+      border-bottom: 1px solid rgba(28,28,26,0.1);
+      padding-bottom: 16px;
+    }
+
     .filter-bar {
       display: flex;
       flex-wrap: wrap;
       gap: 12px 28px;
-      margin-bottom: 8vh;
-      border-bottom: 1px solid rgba(28,28,26,0.1);
-      padding-bottom: 16px;
     }
 
     .filter-btn {
@@ -177,11 +196,88 @@
     .filter-btn.active::after {
       content: "";
       position: absolute;
-      bottom: -17px;
+      bottom: -4px;
       left: 0;
       right: 0;
       height: 1px;
       background: var(--text);
+    }
+
+    .search-box {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-input {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(28,28,26,0.22);
+      border-radius: 0;
+      padding: 4px 24px 4px 0;
+      font-family: inherit;
+      font-size: clamp(0.72rem, 1.1vw, 0.82rem);
+      letter-spacing: 0.1em;
+      color: var(--text);
+      outline: none;
+      width: clamp(160px, 20vw, 240px);
+      transition: border-color 0.3s;
+      -webkit-appearance: none;
+    }
+
+    .search-input::placeholder {
+      color: var(--text-dim);
+      letter-spacing: 0.1em;
+    }
+
+    .search-input:focus {
+      border-bottom-color: var(--text);
+    }
+
+    .search-clear {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      font-family: inherit;
+      font-size: 1.1rem;
+      line-height: 1;
+      color: var(--text-dim);
+      cursor: pointer;
+      display: none;
+      padding: 2px 4px;
+      user-select: none;
+    }
+
+    .search-clear:hover {
+      color: var(--text);
+    }
+
+    .search-box.has-val .search-clear {
+      display: block;
+    }
+
+    .no-results {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 10vh 0;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      color: var(--text-dim);
+      line-height: 1.8;
+    }
+
+    .tracklist-list li.is-matched-track {
+      background: rgba(28,28,26,0.06);
+      padding: 2px 6px;
+      margin: 2px -6px;
+      border-radius: 2px;
+    }
+
+    .tracklist-list li.is-matched-track .t-title {
+      font-weight: 600;
     }
 
     .mix-item.is-hidden {
@@ -308,14 +404,23 @@
       <h1>YouTube</h1>
     </header>
 
-    <nav class="filter-bar">
-      <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="wax">Diggin' on Wax</button>
-      <button class="filter-btn" data-filter="music">Diggin' on Music</button>
-      <button class="filter-btn" data-filter="corner">Corner</button>
-    </nav>
+    <div class="filter-header">
+      <nav class="filter-bar">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="wax">Diggin' on Wax</button>
+        <button class="filter-btn" data-filter="music">Diggin' on Music</button>
+        <button class="filter-btn" data-filter="corner">Corner</button>
+      </nav>
+      <div class="search-box">
+        <input type="text" id="track-search" class="search-input" placeholder="Search track or artist..." autocomplete="off" spellcheck="false">
+        <button id="search-clear" class="search-clear" type="button" aria-label="Clear search">×</button>
+      </div>
+    </div>
 
     <main class="mix-grid">
+      <div id="no-results" class="no-results is-hidden">
+        No tracks found for "<span id="search-query-echo"></span>"
+      </div>
 
             <div class="mix-item" data-category="wax">
         <a href="https://youtu.be/IcMDd9Op6pQ" target="_blank" rel="noopener">
@@ -1538,36 +1643,129 @@
     document.addEventListener('DOMContentLoaded', () => {
       const buttons = document.querySelectorAll('.filter-btn');
       const items = document.querySelectorAll('.mix-item');
+      const searchInput = document.getElementById('track-search');
+      const searchBox = document.querySelector('.search-box');
+      const searchClear = document.getElementById('search-clear');
+      const noResults = document.getElementById('no-results');
+      const queryEcho = document.getElementById('search-query-echo');
 
-      function setFilter(category) {
+      let currentCategory = 'all';
+      let currentQuery = '';
+
+      // Cache searchable texts for instant search
+      const itemData = Array.from(items).map(item => {
+        const title = item.querySelector('.mix-title')?.textContent || '';
+        const sub = item.querySelector('.mix-sub')?.textContent || '';
+        const trackElements = Array.from(item.querySelectorAll('.tracklist-list li'));
+        const trackTexts = trackElements.map(li => ({
+          el: li,
+          text: li.textContent.toLowerCase()
+        }));
+        const fullSearchable = (title + ' ' + sub + ' ' + trackTexts.map(t => t.text).join(' ')).toLowerCase();
+        const details = item.querySelector('.tracklist-details');
+        return {
+          item,
+          category: item.dataset.category,
+          fullSearchable,
+          trackTexts,
+          details
+        };
+      });
+
+      function applyFilters() {
+        const q = currentQuery.trim().toLowerCase();
+        const words = q ? q.split(/\s+/).filter(Boolean) : [];
+        let visibleCount = 0;
+
+        itemData.forEach(({ item, category, fullSearchable, trackTexts, details }) => {
+          const matchesCategory = (currentCategory === 'all' || category === currentCategory);
+          const matchesSearch = words.length === 0 || words.every(w => fullSearchable.includes(w));
+
+          if (matchesCategory && matchesSearch) {
+            item.classList.remove('is-hidden');
+            visibleCount++;
+
+            if (words.length > 0) {
+              let hasTrackMatch = false;
+              trackTexts.forEach(({ el, text }) => {
+                const matches = words.some(w => text.includes(w));
+                if (matches) {
+                  el.classList.add('is-matched-track');
+                  hasTrackMatch = true;
+                } else {
+                  el.classList.remove('is-matched-track');
+                }
+              });
+              if (hasTrackMatch && details) {
+                details.open = true;
+              }
+            } else {
+              trackTexts.forEach(({ el }) => el.classList.remove('is-matched-track'));
+            }
+          } else {
+            item.classList.add('is-hidden');
+            trackTexts.forEach(({ el }) => el.classList.remove('is-matched-track'));
+            if (words.length > 0 && details) {
+              details.open = false;
+            }
+          }
+        });
+
+        if (noResults) {
+          if (visibleCount === 0) {
+            noResults.classList.remove('is-hidden');
+            if (queryEcho) queryEcho.textContent = currentQuery;
+          } else {
+            noResults.classList.add('is-hidden');
+          }
+        }
+      }
+
+      function setCategory(category) {
+        currentCategory = category;
         buttons.forEach(btn => {
           btn.classList.toggle('active', btn.dataset.filter === category);
         });
-
-        items.forEach(item => {
-          if (category === 'all' || item.dataset.category === category) {
-            item.classList.remove('is-hidden');
-          } else {
-            item.classList.add('is-hidden');
-          }
-        });
+        applyFilters();
       }
 
       buttons.forEach(btn => {
         btn.addEventListener('click', () => {
           const filter = btn.dataset.filter;
-          setFilter(filter);
+          setCategory(filter);
           if (filter === 'all') {
-            history.replaceState(null, '', window.location.pathname);
+            history.replaceState(null, '', window.location.pathname + (window.location.search || ''));
           } else {
             window.location.hash = filter;
           }
         });
       });
 
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          currentQuery = e.target.value;
+          if (searchBox) {
+            searchBox.classList.toggle('has-val', currentQuery.length > 0);
+          }
+          applyFilters();
+        });
+      }
+
+      if (searchClear) {
+        searchClear.addEventListener('click', () => {
+          if (searchInput) {
+            searchInput.value = '';
+            currentQuery = '';
+            if (searchBox) searchBox.classList.remove('has-val');
+            searchInput.focus();
+            applyFilters();
+          }
+        });
+      }
+
       const hash = window.location.hash.replace('#', '').toLowerCase();
       if (['wax', 'music', 'corner'].includes(hash)) {
-        setFilter(hash);
+        setCategory(hash);
       }
     });
   </script>
