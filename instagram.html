@@ -58,29 +58,39 @@
     header {
       display: flex;
       align-items: baseline;
-      gap: 32px;
+      justify-content: space-between;
+      gap: 24px;
       margin-bottom: 10vh;
+      flex-wrap: wrap;
     }
 
-    .back {
+    .header-left {
+      display: flex;
+      align-items: baseline;
+      gap: 32px;
+    }
+
+    .ig-link {
       font-size: 0.75rem;
-      letter-spacing: 0.25em;
+      letter-spacing: 0.2em;
       color: var(--text-dim);
       text-decoration: none;
-      text-transform: uppercase;
+      border-bottom: 1px solid rgba(28,28,26,0.2);
+      padding-bottom: 2px;
+      transition: color 0.3s, border-color 0.3s;
     }
 
-    .back:hover { color: var(--text); }
+    .ig-link:hover {
+      color: var(--text);
+      border-bottom-color: var(--text);
+    }
 
-    header h1 {
-      font-size: clamp(1rem, 2vw, 1.3rem);
-      font-weight: normal;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
+    .ig-footer {
+      margin-top: 6vh;
     }
 
     footer {
-      margin-top: 12vh;
+      margin-top: 10vh;
       font-size: 0.7rem;
       letter-spacing: 0.2em;
       color: var(--text-dim);
@@ -88,15 +98,18 @@
 
     @media (max-width: 600px) {
       .wrap { padding: 6vh 5vw; }
-      header { margin-bottom: 6vh; }
+      header { margin-bottom: 6vh; gap: 16px; }
     }
   </style>
 </head>
 <body>
   <div class="wrap">
     <header>
-      <a class="back" href="index.html">← Pond</a>
-      <h1>Instagram</h1>
+      <div class="header-left">
+        <a class="back" href="index.html">← Pond</a>
+        <h1>Instagram</h1>
+      </div>
+      <a class="ig-link" href="https://www.instagram.com/djakio_tokyo/" target="_blank" rel="noopener">@djakio_tokyo ↗</a>
     </header>
     <main>
       <behold-widget feed-id="jXmowpCM2Yq7P30qUoYN"></behold-widget>
@@ -106,6 +119,9 @@
           s.src="https://w.behold.so/widget.js";d.head.append(s);
         })();
       </script>
+      <div class="ig-footer">
+        <a class="ig-link" href="https://www.instagram.com/djakio_tokyo/" target="_blank" rel="noopener">Follow @djakio_tokyo on Instagram →</a>
+      </div>
     </main>
     <footer>© POND</footer>
   </div>
