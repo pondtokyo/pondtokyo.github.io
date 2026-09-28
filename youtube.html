@@ -83,6 +83,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
       gap: 48px 36px;
+      align-items: start;
     }
 
     .mix-item a {
@@ -186,9 +187,16 @@
     .mix-item.is-hidden {
       display: none !important;
     }
+    .mix-actions {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 7px;
+    }
+
     .note-link {
       display: inline-block;
-      margin-top: 8px;
       font-size: 0.65rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
@@ -202,6 +210,94 @@
     .note-link:hover {
       color: var(--text);
       border-bottom-color: var(--text);
+    }
+
+    .tracklist-details {
+      width: 100%;
+    }
+
+    .tracklist-toggle {
+      list-style: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      cursor: pointer;
+      border-bottom: 1px solid rgba(28,28,26,0.18);
+      padding-bottom: 2px;
+      transition: color 0.3s, border-color 0.3s;
+      user-select: none;
+    }
+
+    .tracklist-toggle::-webkit-details-marker {
+      display: none;
+    }
+
+    .tracklist-toggle::after {
+      content: "▾";
+      font-size: 0.65rem;
+      transition: transform 0.25s ease;
+      display: inline-block;
+    }
+
+    .tracklist-details[open] .tracklist-toggle {
+      color: var(--text);
+      border-bottom-color: var(--text);
+    }
+
+    .tracklist-details[open] .tracklist-toggle::after {
+      transform: rotate(180deg);
+    }
+
+    .tracklist-toggle:hover {
+      color: var(--text);
+      border-bottom-color: var(--text);
+    }
+
+    .tracklist-list {
+      margin-top: 12px;
+      padding-left: 18px;
+      font-size: 0.72rem;
+      line-height: 1.7;
+      max-height: 220px;
+      overflow-y: auto;
+      border-top: 1px solid rgba(28,28,26,0.1);
+      padding-top: 10px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(28,28,26,0.2) transparent;
+    }
+
+    .tracklist-list::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .tracklist-list::-webkit-scrollbar-thumb {
+      background: rgba(28,28,26,0.2);
+      border-radius: 2px;
+    }
+
+    .tracklist-list li {
+      color: var(--text-dim);
+      padding: 1px 0;
+    }
+
+    .tracklist-list .t-title {
+      color: var(--text);
+      letter-spacing: 0.02em;
+    }
+
+    .tracklist-list .t-sep {
+      color: rgba(28,28,26,0.3);
+      margin: 0 4px;
+    }
+
+    .tracklist-list .t-artist {
+      color: rgba(28,28,26,0.55);
+      font-size: 0.95em;
+      letter-spacing: 0.02em;
     }
   </style>
 </head>
@@ -221,7 +317,7 @@
 
     <main class="mix-grid">
 
-      <div class="mix-item" data-category="wax">
+            <div class="mix-item" data-category="wax">
         <a href="https://youtu.be/IcMDd9Op6pQ" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/wax7.jpg" alt="Diggin' on Wax vol.7 - Side A"></div>
           <div class="mix-info">
@@ -229,9 +325,29 @@
             <p class="mix-sub">Diggin' on Wax</p>
           </div>
         </a>
+        <div class="mix-actions">
+          <details class="tracklist-details" name="mix-tracklist">
+            <summary class="tracklist-toggle">Tracklist</summary>
+            <ol class="tracklist-list">
+              <li><span class="t-title">Pass the Tu Sheng Peng</span> <span class="t-sep">—</span> <span class="t-artist">FRANKIE PAUL</span></li>
+              <li><span class="t-title">I Am Free</span> <span class="t-sep">—</span> <span class="t-artist">THE GAYLADS</span></li>
+              <li><span class="t-title">One Draw (feat. Camilla)</span> <span class="t-sep">—</span> <span class="t-artist">Alborosie</span></li>
+              <li><span class="t-title">Let&#x27;s Do It Again</span> <span class="t-sep">—</span> <span class="t-artist">J Boog</span></li>
+              <li><span class="t-title">Love My Woman</span> <span class="t-sep">—</span> <span class="t-artist">Yami Bolo</span></li>
+              <li><span class="t-title">Feel So Real</span> <span class="t-sep">—</span> <span class="t-artist">SANCHEZ</span></li>
+              <li><span class="t-title">I Was Born a Winner</span> <span class="t-sep">—</span> <span class="t-artist">Freddie McGregor</span></li>
+              <li><span class="t-title">Doctor Love</span> <span class="t-sep">—</span> <span class="t-artist">John Holt</span></li>
+              <li><span class="t-title">Drum Song Dub</span> <span class="t-sep">—</span> <span class="t-artist">Scientist</span></li>
+              <li><span class="t-title">I Spy</span> <span class="t-sep">—</span> <span class="t-artist">Lila Iké</span></li>
+              <li><span class="t-title">LOVER&#x27;S RACE feat. J BOOG</span> <span class="t-sep">—</span> <span class="t-artist">Jay.Keyz</span></li>
+              <li><span class="t-title">Holding Back the Years</span> <span class="t-sep">—</span> <span class="t-artist">Daynea Deacon</span></li>
+              <li><span class="t-title">Drown Love</span> <span class="t-sep">—</span> <span class="t-artist">ARIWA</span></li>
+            </ol>
+          </details>
+        </div>
       </div>
 
-      <div class="mix-item" data-category="wax">
+            <div class="mix-item" data-category="wax">
         <a href="https://youtu.be/RJZsLeOSE48" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/wax6.jpg" alt="Diggin' on Wax vol.6 - Side B"></div>
           <div class="mix-info">
@@ -239,9 +355,30 @@
             <p class="mix-sub">Diggin' on Wax</p>
           </div>
         </a>
+        <div class="mix-actions">
+          <details class="tracklist-details" name="mix-tracklist">
+            <summary class="tracklist-toggle">Tracklist</summary>
+            <ol class="tracklist-list">
+              <li><span class="t-title">Do The Thing</span> <span class="t-sep">—</span> <span class="t-artist">reina</span></li>
+              <li><span class="t-title">I Like It (Soul Synopsis Mix)</span> <span class="t-sep">—</span> <span class="t-artist">DeBarge</span></li>
+              <li><span class="t-title">Feel the Good Times</span> <span class="t-sep">—</span> <span class="t-artist">Charlene Smith</span></li>
+              <li><span class="t-title">Give Me the Night (Chill Night Mix)</span> <span class="t-sep">—</span> <span class="t-artist">Randy Crawford</span></li>
+              <li><span class="t-title">Runnin&#x27;</span> <span class="t-sep">—</span> <span class="t-artist">Soul Supreme</span></li>
+              <li><span class="t-title">Runnin&#x27;</span> <span class="t-sep">—</span> <span class="t-artist">The Pharcyde</span></li>
+              <li><span class="t-title">Right Here (Human Nature Duet) [Demolition Dub Mix]</span> <span class="t-sep">—</span> <span class="t-artist">SWV</span></li>
+              <li><span class="t-title">Relax Your Mind (feat. Faith Evans)</span> <span class="t-sep">—</span> <span class="t-artist">Boyz II Men</span></li>
+              <li><span class="t-title">We Are One (feat. Frankie Beverly) [2004 - Remastered]</span> <span class="t-sep">—</span> <span class="t-artist">Maze</span></li>
+              <li><span class="t-title">Step&#x27; n Slide (feat. Kalpis Da Fonk)</span> <span class="t-sep">—</span> <span class="t-artist">grooveman Spot, Kzyboost &amp; KENT</span></li>
+              <li><span class="t-title">Sexy Love</span> <span class="t-sep">—</span> <span class="t-artist">Ne-Yo</span></li>
+              <li><span class="t-title">Go Crazy</span> <span class="t-sep">—</span> <span class="t-artist">Chris Brown &amp; Young Thug</span></li>
+              <li><span class="t-title">Keeps On Fallin&#x27; (feat. Ella Mai)</span> <span class="t-sep">—</span> <span class="t-artist">Babyface</span></li>
+              <li><span class="t-title">Steady</span> <span class="t-sep">—</span> <span class="t-artist">WizKid</span></li>
+            </ol>
+          </details>
+        </div>
       </div>
 
-      <div class="mix-item" data-category="wax">
+            <div class="mix-item" data-category="wax">
         <a href="https://youtu.be/wX0iOnAXnro" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/wax6.jpg" alt="Diggin' on Wax vol.6 - Side A"></div>
           <div class="mix-info">
@@ -249,9 +386,29 @@
             <p class="mix-sub">Diggin' on Wax</p>
           </div>
         </a>
+        <div class="mix-actions">
+          <details class="tracklist-details" name="mix-tracklist">
+            <summary class="tracklist-toggle">Tracklist</summary>
+            <ol class="tracklist-list">
+              <li><span class="t-title">Stakes Is High Spinna Remix</span> <span class="t-sep">—</span> <span class="t-artist">De La Soul</span></li>
+              <li><span class="t-title">The Rhyme (Remix)</span> <span class="t-sep">—</span> <span class="t-artist">Keith Murray</span></li>
+              <li><span class="t-title">Ill Vibe</span> <span class="t-sep">—</span> <span class="t-artist">Busta Rhymes Feat. Q-Tip</span></li>
+              <li><span class="t-title">NY, NY</span> <span class="t-sep">—</span> <span class="t-artist">Marley Marl</span></li>
+              <li><span class="t-title">I&#x27;m Leaving</span> <span class="t-sep">—</span> <span class="t-artist">Rob Swift</span></li>
+              <li><span class="t-title">Distortion To Static</span> <span class="t-sep">—</span> <span class="t-artist">The Roots</span></li>
+              <li><span class="t-title">Don&#x27;t You Forget It</span> <span class="t-sep">—</span> <span class="t-artist">Glenn Lewis</span></li>
+              <li><span class="t-title">The Light</span> <span class="t-sep">—</span> <span class="t-artist">Indigo Jam Unit</span></li>
+              <li><span class="t-title">Give a Little (feat. Maverick Sabre) [Blue Lab Beats Remix]</span> <span class="t-sep">—</span> <span class="t-artist">Ego Ella May</span></li>
+              <li><span class="t-title">I Feel It Coming (feat. 中野 陽介)</span> <span class="t-sep">—</span> <span class="t-artist">KH &amp; The LASTTRAK</span></li>
+              <li><span class="t-title">都会 (CITY LOVERS ROCK EDITION) FEAT. SHIHO.C</span> <span class="t-sep">—</span> <span class="t-artist">HF International</span></li>
+              <li><span class="t-title">The American Dream (feat. Miguel &amp; The Last Artful, Dodgr)</span> <span class="t-sep">—</span> <span class="t-artist">Blu &amp; Exile, Blu &amp; Exile</span></li>
+              <li><span class="t-title">Morning in America</span> <span class="t-sep">—</span> <span class="t-artist">Durand Jones &amp; The Indications</span></li>
+            </ol>
+          </details>
+        </div>
       </div>
 
-      <div class="mix-item" data-category="wax">
+            <div class="mix-item" data-category="wax">
         <a href="https://youtu.be/EUHJ1_8k0nU" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/wax5.jpg" alt="Diggin' on Wax vol.5 - Side B"></div>
           <div class="mix-info">
@@ -259,10 +416,30 @@
             <p class="mix-sub">Diggin' on Wax</p>
           </div>
         </a>
-        <a class="note-link" href="https://note.com/pond_tokyo/n/nba0951c219a5" target="_blank" rel="noopener">Behind the Crates ↗</a>
+        <div class="mix-actions">
+          <a class="note-link" href="https://note.com/pond_tokyo/n/nba0951c219a5" target="_blank" rel="noopener">Behind the Crates ↗</a>
+          <details class="tracklist-details" name="mix-tracklist">
+            <summary class="tracklist-toggle">Tracklist</summary>
+            <ol class="tracklist-list">
+              <li><span class="t-title">she just wanna see me rn</span> <span class="t-sep">—</span> <span class="t-artist">Mac Ayres</span></li>
+              <li><span class="t-title">Temptation</span> <span class="t-sep">—</span> <span class="t-artist">Raveena</span></li>
+              <li><span class="t-title">No Matter What</span> <span class="t-sep">—</span> <span class="t-artist">Aretha Franklin</span></li>
+              <li><span class="t-title">Résumé</span> <span class="t-sep">—</span> <span class="t-artist">Jenevieve</span></li>
+              <li><span class="t-title">Two Wrongs</span> <span class="t-sep">—</span> <span class="t-artist">Tuxedo</span></li>
+              <li><span class="t-title">Leave the Door Open</span> <span class="t-sep">—</span> <span class="t-artist">Bruno Mars, Anderson .Paak &amp; Silk Sonic</span></li>
+              <li><span class="t-title">Daydreaming</span> <span class="t-sep">—</span> <span class="t-artist">NxWorries</span></li>
+              <li><span class="t-title">Let Me Be the One (feat. Q-Tip) [Ummah Radio Remix Featuring Q-Tip]</span> <span class="t-sep">—</span> <span class="t-artist">Mint Condition</span></li>
+              <li><span class="t-title">If Only</span> <span class="t-sep">—</span> <span class="t-artist">Raveena</span></li>
+              <li><span class="t-title">LOOP</span> <span class="t-sep">—</span> <span class="t-artist">SIRUP</span></li>
+              <li><span class="t-title">Mr Heart</span> <span class="t-sep">—</span> <span class="t-artist">eminata</span></li>
+              <li><span class="t-title">Skyline</span> <span class="t-sep">—</span> <span class="t-artist">FKJ</span></li>
+              <li><span class="t-title">The Devil&#x27;s in the Details</span> <span class="t-sep">—</span> <span class="t-artist">Mac Ayres</span></li>
+            </ol>
+          </details>
+        </div>
       </div>
 
-      <div class="mix-item" data-category="wax">
+            <div class="mix-item" data-category="wax">
         <a href="https://youtu.be/a5Ww-ukogR4" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/wax5.jpg" alt="Diggin' on Wax vol.5 - Side A" loading="lazy"></div>
           <div class="mix-info">
@@ -270,10 +447,30 @@
             <p class="mix-sub">Diggin' on Wax</p>
           </div>
         </a>
-        <a class="note-link" href="https://note.com/pond_tokyo/n/n6864826135e4" target="_blank" rel="noopener">Behind the Crates ↗</a>
+        <div class="mix-actions">
+          <a class="note-link" href="https://note.com/pond_tokyo/n/n6864826135e4" target="_blank" rel="noopener">Behind the Crates ↗</a>
+          <details class="tracklist-details" name="mix-tracklist">
+            <summary class="tracklist-toggle">Tracklist</summary>
+            <ol class="tracklist-list">
+              <li><span class="t-title">Making Room For Love</span> <span class="t-sep">—</span> <span class="t-artist">Alton McClain &amp; Destiny</span></li>
+              <li><span class="t-title">A Feeling Is</span> <span class="t-sep">—</span> <span class="t-artist">The Emotions</span></li>
+              <li><span class="t-title">Snooze</span> <span class="t-sep">—</span> <span class="t-artist">SZA</span></li>
+              <li><span class="t-title">Best Part (feat. Daniel Caesar)</span> <span class="t-sep">—</span> <span class="t-artist">H.E.R.</span></li>
+              <li><span class="t-title">Do You Like Me</span> <span class="t-sep">—</span> <span class="t-artist">Daniel Caesar</span></li>
+              <li><span class="t-title">Cinderella Story</span> <span class="t-sep">—</span> <span class="t-artist">Layton Greene</span></li>
+              <li><span class="t-title">what can i do</span> <span class="t-sep">—</span> <span class="t-artist">Luke Chiang, Albert Posis &amp; Jesse Barrera</span></li>
+              <li><span class="t-title">It Isn’t Perfect But It Might Be (from “Bridget Jones- Mad About the Boy” Original Motion Picture So</span> <span class="t-sep">—</span> <span class="t-artist">Olivia Dean</span></li>
+              <li><span class="t-title">プラネタリウム</span> <span class="t-sep">—</span> <span class="t-artist">EVISBEATS</span></li>
+              <li><span class="t-title">Colorado</span> <span class="t-sep">—</span> <span class="t-artist">Kota the Friend</span></li>
+              <li><span class="t-title">Blue</span> <span class="t-sep">—</span> <span class="t-artist">C.O.S.A.</span></li>
+              <li><span class="t-title">My World (Beyond)</span> <span class="t-sep">—</span> <span class="t-artist">anaiis</span></li>
+              <li><span class="t-title">Groovy Little Thing</span> <span class="t-sep">—</span> <span class="t-artist">Robert “Dubwise” Brownie</span></li>
+            </ol>
+          </details>
+        </div>
       </div>
 
-      <div class="mix-item" data-category="wax">
+            <div class="mix-item" data-category="wax">
         <a href="https://youtu.be/jMKgfFImkD0" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/wax4.jpg" alt="Diggin' on Wax vol.4 - Side B" loading="lazy"></div>
           <div class="mix-info">
@@ -281,10 +478,30 @@
             <p class="mix-sub">Diggin' on Wax</p>
           </div>
         </a>
-        <a class="note-link" href="https://note.com/pond_tokyo/n/nf3079a735e23" target="_blank" rel="noopener">Behind the Crates ↗</a>
+        <div class="mix-actions">
+          <a class="note-link" href="https://note.com/pond_tokyo/n/nf3079a735e23" target="_blank" rel="noopener">Behind the Crates ↗</a>
+          <details class="tracklist-details" name="mix-tracklist">
+            <summary class="tracklist-toggle">Tracklist</summary>
+            <ol class="tracklist-list">
+              <li><span class="t-title">It’s Over feat J.Smith (Re’20)</span> <span class="t-sep">—</span> <span class="t-artist">grooveman Spot</span></li>
+              <li><span class="t-title">Shibuya (feat. Syd)</span> <span class="t-sep">—</span> <span class="t-artist">Free Nationals</span></li>
+              <li><span class="t-title">Wandering</span> <span class="t-sep">—</span> <span class="t-artist">iri</span></li>
+              <li><span class="t-title">Unstoppable (FKJ Remix)</span> <span class="t-sep">—</span> <span class="t-artist">Lianne La Havas</span></li>
+              <li><span class="t-title">Tripping Out (feat. Courtney John)</span> <span class="t-sep">—</span> <span class="t-artist">Slowly</span></li>
+              <li><span class="t-title">Nakamarra (feat. Q-Tip)</span> <span class="t-sep">—</span> <span class="t-artist">Hiatus Kaiyote</span></li>
+              <li><span class="t-title">Promises</span> <span class="t-sep">—</span> <span class="t-artist">Cleo Sol</span></li>
+              <li><span class="t-title">Don&#x27;t Let It Go to Your Head</span> <span class="t-sep">—</span> <span class="t-artist">Cleo Sol</span></li>
+              <li><span class="t-title">Night Drive</span> <span class="t-sep">—</span> <span class="t-artist">STUTS, Julia Wu &amp; Phum Viphurit</span></li>
+              <li><span class="t-title">Counting Stars</span> <span class="t-sep">—</span> <span class="t-artist">Nujabes</span></li>
+              <li><span class="t-title">Kiss of Life</span> <span class="t-sep">—</span> <span class="t-artist">Sade</span></li>
+              <li><span class="t-title">Lovely Day</span> <span class="t-sep">—</span> <span class="t-artist">Jill Scott</span></li>
+              <li><span class="t-title">As</span> <span class="t-sep">—</span> <span class="t-artist">Stevie Wonder</span></li>
+            </ol>
+          </details>
+        </div>
       </div>
 
-      <div class="mix-item" data-category="wax">
+            <div class="mix-item" data-category="wax">
         <a href="https://youtu.be/5qk5CK8fGxQ" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/wax4.jpg" alt="Diggin' on Wax vol.4 - Side A" loading="lazy"></div>
           <div class="mix-info">
@@ -292,10 +509,30 @@
             <p class="mix-sub">Diggin' on Wax</p>
           </div>
         </a>
-        <a class="note-link" href="https://note.com/pond_tokyo/n/n52acb3afbc48" target="_blank" rel="noopener">Behind the Crates ↗</a>
+        <div class="mix-actions">
+          <a class="note-link" href="https://note.com/pond_tokyo/n/n52acb3afbc48" target="_blank" rel="noopener">Behind the Crates ↗</a>
+          <details class="tracklist-details" name="mix-tracklist">
+            <summary class="tracklist-toggle">Tracklist</summary>
+            <ol class="tracklist-list">
+              <li><span class="t-title">Home (Remix) [feat. Logic]</span> <span class="t-sep">—</span> <span class="t-artist">Snoh Aalegra</span></li>
+              <li><span class="t-title">Soldier Of Love</span> <span class="t-sep">—</span> <span class="t-artist">Sade</span></li>
+              <li><span class="t-title">Song Cry</span> <span class="t-sep">—</span> <span class="t-artist">JAY-Z</span></li>
+              <li><span class="t-title">Got &#x27;Til It&#x27;s Gone (feat. Q-Tip &amp; Joni Mitchell)</span> <span class="t-sep">—</span> <span class="t-artist">Janet Jackson</span></li>
+              <li><span class="t-title">Big Yellow Taxi (Radio Mix)</span> <span class="t-sep">—</span> <span class="t-artist">Joni Mitchell</span></li>
+              <li><span class="t-title">Blacks and Blues</span> <span class="t-sep">—</span> <span class="t-artist">Bobbi Humphrey</span></li>
+              <li><span class="t-title">Mercy Mercy Me (The Ecology)</span> <span class="t-sep">—</span> <span class="t-artist">Marvin Gaye</span></li>
+              <li><span class="t-title">TOKYO</span> <span class="t-sep">—</span> <span class="t-artist">Nulbarich</span></li>
+              <li><span class="t-title">Inside My Love</span> <span class="t-sep">—</span> <span class="t-artist">Minnie Riperton</span></li>
+              <li><span class="t-title">Love, Love, Love</span> <span class="t-sep">—</span> <span class="t-artist">Donny Hathaway</span></li>
+              <li><span class="t-title">Worries (feat. Dwele)</span> <span class="t-sep">—</span> <span class="t-artist">Robert Glasper Experiment</span></li>
+              <li><span class="t-title">Sleepless Nights (feat. Phoelix)</span> <span class="t-sep">—</span> <span class="t-artist">Dinner Party, TERRACE MARTIN, Robert Glasper, Patrick Douthit &amp; Kamasi Washington</span></li>
+              <li><span class="t-title">Be (Intro)</span> <span class="t-sep">—</span> <span class="t-artist">Common</span></li>
+            </ol>
+          </details>
+        </div>
       </div>
 
-      <div class="mix-item" data-category="wax">
+            <div class="mix-item" data-category="wax">
         <a href="https://youtu.be/3yL8NUC80SE" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/wax3.jpg" alt="Diggin' on Wax vol.3 - Side B" loading="lazy"></div>
           <div class="mix-info">
@@ -303,10 +540,30 @@
             <p class="mix-sub">Diggin' on Wax</p>
           </div>
         </a>
-        <a class="note-link" href="https://note.com/pond_tokyo/n/ndce782123d2e" target="_blank" rel="noopener">Behind the Crates ↗</a>
+        <div class="mix-actions">
+          <a class="note-link" href="https://note.com/pond_tokyo/n/ndce782123d2e" target="_blank" rel="noopener">Behind the Crates ↗</a>
+          <details class="tracklist-details" name="mix-tracklist">
+            <summary class="tracklist-toggle">Tracklist</summary>
+            <ol class="tracklist-list">
+              <li><span class="t-title">Brown Sugar (Incognito Molasses Mix)</span> <span class="t-sep">—</span> <span class="t-artist">D&#x27;Angelo</span></li>
+              <li><span class="t-title">Summer 2020</span> <span class="t-sep">—</span> <span class="t-artist">Jhene Aiko</span></li>
+              <li><span class="t-title">Footsteps in the Dark, Pts. 1 &amp; 2</span> <span class="t-sep">—</span> <span class="t-artist">SiR</span></li>
+              <li><span class="t-title">By Your Side (The Neptunes Remix)</span> <span class="t-sep">—</span> <span class="t-artist">Sade</span></li>
+              <li><span class="t-title">Still Ray</span> <span class="t-sep">—</span> <span class="t-artist">Raphael Saadiq</span></li>
+              <li><span class="t-title">Bag Lady (Cheeba Sac Radio Edit)</span> <span class="t-sep">—</span> <span class="t-artist">Erykah Badu</span></li>
+              <li><span class="t-title">Take You Out</span> <span class="t-sep">—</span> <span class="t-artist">Luther Vandross</span></li>
+              <li><span class="t-title">Caravan of Love</span> <span class="t-sep">—</span> <span class="t-artist">ISLEY JASPER ISLEY</span></li>
+              <li><span class="t-title">接吻</span> <span class="t-sep">—</span> <span class="t-artist">Original Love &amp; Ovall</span></li>
+              <li><span class="t-title">West Coast Love</span> <span class="t-sep">—</span> <span class="t-artist">Emotional Oranges</span></li>
+              <li><span class="t-title">Keep Looking</span> <span class="t-sep">—</span> <span class="t-artist">Sade</span></li>
+              <li><span class="t-title">Night Moods</span> <span class="t-sep">—</span> <span class="t-artist">Chaka Khan</span></li>
+              <li><span class="t-title">Just the Two of Us</span> <span class="t-sep">—</span> <span class="t-artist">Bill Withers &amp; Grover Washington Jr.</span></li>
+            </ol>
+          </details>
+        </div>
       </div>
 
-      <div class="mix-item" data-category="wax">
+            <div class="mix-item" data-category="wax">
         <a href="https://youtu.be/dDxffoj9fac" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/wax3.jpg" alt="Diggin' on Wax vol.3 - Side A" loading="lazy"></div>
           <div class="mix-info">
@@ -314,10 +571,30 @@
             <p class="mix-sub">Diggin' on Wax</p>
           </div>
         </a>
-        <a class="note-link" href="https://note.com/pond_tokyo/n/nbadbe3bedc47" target="_blank" rel="noopener">Behind the Crates ↗</a>
+        <div class="mix-actions">
+          <a class="note-link" href="https://note.com/pond_tokyo/n/nbadbe3bedc47" target="_blank" rel="noopener">Behind the Crates ↗</a>
+          <details class="tracklist-details" name="mix-tracklist">
+            <summary class="tracklist-toggle">Tracklist</summary>
+            <ol class="tracklist-list">
+              <li><span class="t-title">It&#x27;s Always You (Vocal Version)</span> <span class="t-sep">—</span> <span class="t-artist">Chet Baker</span></li>
+              <li><span class="t-title">A Long Walk</span> <span class="t-sep">—</span> <span class="t-artist">Jill Scott</span></li>
+              <li><span class="t-title">On &amp; On</span> <span class="t-sep">—</span> <span class="t-artist">Erykah Badu</span></li>
+              <li><span class="t-title">Wild Sweet Love (feat. Moonbyrd &amp; Jessica Care Moore)</span> <span class="t-sep">—</span> <span class="t-artist">Talib Kweli &amp; Madlib</span></li>
+              <li><span class="t-title">Hello</span> <span class="t-sep">—</span> <span class="t-artist">Erykah Badu</span></li>
+              <li><span class="t-title">Really Love</span> <span class="t-sep">—</span> <span class="t-artist">D&#x27;Angelo and The Vanguard</span></li>
+              <li><span class="t-title">Come Live with Me Angel</span> <span class="t-sep">—</span> <span class="t-artist">Marvin Gaye</span></li>
+              <li><span class="t-title">Tonight&#x27;s the Night</span> <span class="t-sep">—</span> <span class="t-artist">Herbie Hancock</span></li>
+              <li><span class="t-title">Waiting In Vain (feat. Tiwa Savage)</span> <span class="t-sep">—</span> <span class="t-artist">Bob Marley &amp; The Wailers</span></li>
+              <li><span class="t-title">Stars In Your Eyes</span> <span class="t-sep">—</span> <span class="t-artist">Kan Sano</span></li>
+              <li><span class="t-title">Down the Backstreets (feat. Lonnie Liston Smith)</span> <span class="t-sep">—</span> <span class="t-artist">Guru</span></li>
+              <li><span class="t-title">The Corner (feat. The Last Poets) [feat. The Last Poets]</span> <span class="t-sep">—</span> <span class="t-artist">Common</span></li>
+              <li><span class="t-title">N.Y. State Of Mind</span> <span class="t-sep">—</span> <span class="t-artist">NaS</span></li>
+            </ol>
+          </details>
+        </div>
       </div>
 
-      <div class="mix-item" data-category="wax">
+            <div class="mix-item" data-category="wax">
         <a href="https://youtu.be/96cf9rfkR2Q" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/wax2.jpg" alt="Diggin' on Wax vol.2 - Side B" loading="lazy"></div>
           <div class="mix-info">
@@ -325,10 +602,29 @@
             <p class="mix-sub">Diggin' on Wax</p>
           </div>
         </a>
-        <a class="note-link" href="https://note.com/pond_tokyo/n/nf107400ad0e5" target="_blank" rel="noopener">Behind the Crates ↗</a>
+        <div class="mix-actions">
+          <a class="note-link" href="https://note.com/pond_tokyo/n/nf107400ad0e5" target="_blank" rel="noopener">Behind the Crates ↗</a>
+          <details class="tracklist-details" name="mix-tracklist">
+            <summary class="tracklist-toggle">Tracklist</summary>
+            <ol class="tracklist-list">
+              <li><span class="t-title">Hello, my friend</span> <span class="t-sep">—</span> <span class="t-artist">PUSHIM</span></li>
+              <li><span class="t-title">What You Won&#x27;t Do for Love</span> <span class="t-sep">—</span> <span class="t-artist">Big Mountain</span></li>
+              <li><span class="t-title">Turn Your Lights Down Low (feat. Lauryn Hill)</span> <span class="t-sep">—</span> <span class="t-artist">Bob Marley</span></li>
+              <li><span class="t-title">Soul Provider</span> <span class="t-sep">—</span> <span class="t-artist">ROMAIN VIRGO</span></li>
+              <li><span class="t-title">Switch You On</span> <span class="t-sep">—</span> <span class="t-artist">ROMAIN VIRGO</span></li>
+              <li><span class="t-title">Always On My Mind</span> <span class="t-sep">—</span> <span class="t-artist">DA&#x27;VILLE</span></li>
+              <li><span class="t-title">Rock Away</span> <span class="t-sep">—</span> <span class="t-artist">Beres Hammond</span></li>
+              <li><span class="t-title">It&#x27;s Growing</span> <span class="t-sep">—</span> <span class="t-artist">Garnett Silk</span></li>
+              <li><span class="t-title">Don&#x27;t Throw It All Away</span> <span class="t-sep">—</span> <span class="t-artist">BARRINGTON LEVY</span></li>
+              <li><span class="t-title">Before You Walk Out Of My Life</span> <span class="t-sep">—</span> <span class="t-artist">ONEGRAM</span></li>
+              <li><span class="t-title">Sweet Life</span> <span class="t-sep">—</span> <span class="t-artist">CocoaTea</span></li>
+              <li><span class="t-title">いつもそばで</span> <span class="t-sep">—</span> <span class="t-artist">MOOMIN</span></li>
+            </ol>
+          </details>
+        </div>
       </div>
 
-      <div class="mix-item" data-category="wax">
+            <div class="mix-item" data-category="wax">
         <a href="https://youtu.be/g4LkAKVkwl4" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/wax2.jpg" alt="Diggin' on Wax vol.2 - Side A" loading="lazy"></div>
           <div class="mix-info">
@@ -336,10 +632,30 @@
             <p class="mix-sub">Diggin' on Wax</p>
           </div>
         </a>
-        <a class="note-link" href="https://note.com/pond_tokyo/n/n1bbdd039150f" target="_blank" rel="noopener">Behind the Crates ↗</a>
+        <div class="mix-actions">
+          <a class="note-link" href="https://note.com/pond_tokyo/n/n1bbdd039150f" target="_blank" rel="noopener">Behind the Crates ↗</a>
+          <details class="tracklist-details" name="mix-tracklist">
+            <summary class="tracklist-toggle">Tracklist</summary>
+            <ol class="tracklist-list">
+              <li><span class="t-title">Diggin On You (Soulpower Remix)</span> <span class="t-sep">—</span> <span class="t-artist">TLC</span></li>
+              <li><span class="t-title">Waterfalls</span> <span class="t-sep">—</span> <span class="t-artist">TLC</span></li>
+              <li><span class="t-title">Come Close (feat. Mary J. Blige) [Edited]</span> <span class="t-sep">—</span> <span class="t-artist">Common</span></li>
+              <li><span class="t-title">Feel Like Makin&#x27; Love</span> <span class="t-sep">—</span> <span class="t-artist">D&#x27;Angelo</span></li>
+              <li><span class="t-title">Before You Walk Out Of My Life (Pete Rock Mix)</span> <span class="t-sep">—</span> <span class="t-artist">Monica</span></li>
+              <li><span class="t-title">Mary Jane (All Night Long)</span> <span class="t-sep">—</span> <span class="t-artist">Mary J. Blige</span></li>
+              <li><span class="t-title">Can We Talk</span> <span class="t-sep">—</span> <span class="t-artist">Tevin Campbell</span></li>
+              <li><span class="t-title">I Wanna Be Down</span> <span class="t-sep">—</span> <span class="t-artist">Brandy</span></li>
+              <li><span class="t-title">Come Home</span> <span class="t-sep">—</span> <span class="t-artist">Groove Theory</span></li>
+              <li><span class="t-title">Break Ups 2 Make Ups (feat. D&#x27;Angelo)</span> <span class="t-sep">—</span> <span class="t-artist">Method Man</span></li>
+              <li><span class="t-title">Lady (C J Mackintosh Radio Edit)</span> <span class="t-sep">—</span> <span class="t-artist">D&#x27;Angelo</span></li>
+              <li><span class="t-title">The Sweetest Taboo</span> <span class="t-sep">—</span> <span class="t-artist">Sade</span></li>
+              <li><span class="t-title">Sweetest Somebody I Know</span> <span class="t-sep">—</span> <span class="t-artist">Stevie Wonder</span></li>
+            </ol>
+          </details>
+        </div>
       </div>
 
-      <div class="mix-item" data-category="wax">
+            <div class="mix-item" data-category="wax">
         <a href="https://youtu.be/zIz0-ngOwko" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/wax1-sideB.jpg" alt="Diggin' on Wax vol.1 - Side B" loading="lazy"></div>
           <div class="mix-info">
@@ -347,10 +663,33 @@
             <p class="mix-sub">Diggin' on Wax</p>
           </div>
         </a>
-        <a class="note-link" href="https://note.com/pond_tokyo/n/n9dda62874a0b" target="_blank" rel="noopener">Behind the Crates ↗</a>
+        <div class="mix-actions">
+          <a class="note-link" href="https://note.com/pond_tokyo/n/n9dda62874a0b" target="_blank" rel="noopener">Behind the Crates ↗</a>
+          <details class="tracklist-details" name="mix-tracklist">
+            <summary class="tracklist-toggle">Tracklist</summary>
+            <ol class="tracklist-list">
+              <li><span class="t-title">I Think I&#x27;ll Call It Morning</span> <span class="t-sep">—</span> <span class="t-artist">Gil Scott-Heron</span></li>
+              <li><span class="t-title">Mornin&#x27;</span> <span class="t-sep">—</span> <span class="t-artist">Al Jarreau</span></li>
+              <li><span class="t-title">Black Superhero (feat. Killer Mike, BJ the Chicago Kid &amp; Big K.R.I.T.)</span> <span class="t-sep">—</span> <span class="t-artist">Robert Glasper Experiment</span></li>
+              <li><span class="t-title">Guidance  feat. Amel Larrieux</span> <span class="t-sep">—</span> <span class="t-artist">Guru</span></li>
+              <li><span class="t-title">Death Becomes You (feat. C.L. Smooth &amp; YGZ)</span> <span class="t-sep">—</span> <span class="t-artist">Pete Rock</span></li>
+              <li><span class="t-title">Life&#x27;s a Bitch (feat. AZ &amp; Olu Dara)</span> <span class="t-sep">—</span> <span class="t-artist">Nas</span></li>
+              <li><span class="t-title">Respiration (feat. Common)</span> <span class="t-sep">—</span> <span class="t-artist">Black Star</span></li>
+              <li><span class="t-title">Son of A (feat. JuJu Rogers)</span> <span class="t-sep">—</span> <span class="t-artist">Harleighblu &amp; Bluestaeb</span></li>
+              <li><span class="t-title">Paradise Remix feat. mabanua, ISSUGI</span> <span class="t-sep">—</span> <span class="t-artist">Daichi Yamamoto</span></li>
+              <li><span class="t-title">The Final View</span> <span class="t-sep">—</span> <span class="t-artist">Nujabes</span></li>
+              <li><span class="t-title">Crumblin&#x27; Erb</span> <span class="t-sep">—</span> <span class="t-artist">Outkast</span></li>
+              <li><span class="t-title">Time&#x27;s Up (Buckwild)</span> <span class="t-sep">—</span> <span class="t-artist">O.C.</span></li>
+              <li><span class="t-title">Gameplan</span> <span class="t-sep">—</span> <span class="t-artist">Lord Finesse</span></li>
+              <li><span class="t-title">Kemuri</span> <span class="t-sep">—</span> <span class="t-artist">DJ KRUSH</span></li>
+              <li><span class="t-title">Memory Lane (Sittin&#x27; in da Park)</span> <span class="t-sep">—</span> <span class="t-artist">Nas</span></li>
+              <li><span class="t-title">NINGEN State Of Mind II Remix (feat. Awich)</span> <span class="t-sep">—</span> <span class="t-artist">RITTO</span></li>
+            </ol>
+          </details>
+        </div>
       </div>
 
-      <div class="mix-item" data-category="wax">
+            <div class="mix-item" data-category="wax">
         <a href="https://youtu.be/8z3E9QRv1Mc" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/wax1-sideA.jpg" alt="Diggin' on Wax vol.1 - Side A" loading="lazy"></div>
           <div class="mix-info">
@@ -358,10 +697,30 @@
             <p class="mix-sub">Diggin' on Wax</p>
           </div>
         </a>
-        <a class="note-link" href="https://note.com/pond_tokyo/n/n83704bce9bd1" target="_blank" rel="noopener">Behind the Crates ↗</a>
+        <div class="mix-actions">
+          <a class="note-link" href="https://note.com/pond_tokyo/n/n83704bce9bd1" target="_blank" rel="noopener">Behind the Crates ↗</a>
+          <details class="tracklist-details" name="mix-tracklist">
+            <summary class="tracklist-toggle">Tracklist</summary>
+            <ol class="tracklist-list">
+              <li><span class="t-title">Change (Makes You Want to Hustle)</span> <span class="t-sep">—</span> <span class="t-artist">Donald Byrd</span></li>
+              <li><span class="t-title">BRAZILIAN RHYME</span> <span class="t-sep">—</span> <span class="t-artist">Marcus Miller</span></li>
+              <li><span class="t-title">Full Moon (Soulchild remix)</span> <span class="t-sep">—</span> <span class="t-artist">Brandy</span></li>
+              <li><span class="t-title">Keep Dancing (feat. Full Crate)</span> <span class="t-sep">—</span> <span class="t-artist">SIRUP</span></li>
+              <li><span class="t-title">Strip Club</span> <span class="t-sep">—</span> <span class="t-artist">Jaylib</span></li>
+              <li><span class="t-title">We Run Things (It&#x27;s Like Dat)</span> <span class="t-sep">—</span> <span class="t-artist">Da Bush Babees</span></li>
+              <li><span class="t-title">Jump Around (Pete Rock Remix)</span> <span class="t-sep">—</span> <span class="t-artist">House of Pain</span></li>
+              <li><span class="t-title">Long Beach (feat. Hello O&#x27;shay &amp; Alex Banin)</span> <span class="t-sep">—</span> <span class="t-artist">Kota the Friend</span></li>
+              <li><span class="t-title">What&#x27;s the Use</span> <span class="t-sep">—</span> <span class="t-artist">Mac Miller</span></li>
+              <li><span class="t-title">Magic Hour</span> <span class="t-sep">—</span> <span class="t-artist">STUTS, BIM, RYO-Z</span></li>
+              <li><span class="t-title">Iced Tea</span> <span class="t-sep">—</span> <span class="t-artist">Joyce Wrice &amp; KAYTRANADA</span></li>
+              <li><span class="t-title">NOTHIN LIKE U (feat. Ty Dolla $ign)</span> <span class="t-sep">—</span> <span class="t-artist">KAYTRANADA</span></li>
+              <li><span class="t-title">jam (with iri)</span> <span class="t-sep">—</span> <span class="t-artist">milet</span></li>
+            </ol>
+          </details>
+        </div>
       </div>
 
-      <div class="mix-item" data-category="corner">
+            <div class="mix-item" data-category="corner">
         <a href="https://youtu.be/NYIphjxLmHM" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/corner-coffee.png" alt="Diggin' on Corner - Sidewalk Coffee" loading="lazy"></div>
           <div class="mix-info">
@@ -369,9 +728,21 @@
             <p class="mix-sub">Diggin' on Corner</p>
           </div>
         </a>
+        <div class="mix-actions">
+          <details class="tracklist-details" name="mix-tracklist">
+            <summary class="tracklist-toggle">Tracklist</summary>
+            <ol class="tracklist-list">
+              <li><span class="t-title">Everybody Loves the Sunshine</span> <span class="t-sep">—</span> <span class="t-artist">Roy Ayers Ubiquity</span></li>
+              <li><span class="t-title">Skylarking</span> <span class="t-sep">—</span> <span class="t-artist">Horace Andy</span></li>
+              <li><span class="t-title">Ribbon In the Sky</span> <span class="t-sep">—</span> <span class="t-artist">Dennis Brown</span></li>
+              <li><span class="t-title">Summer Love</span> <span class="t-sep">—</span> <span class="t-artist">The Blackbyrds</span></li>
+              <li><span class="t-title">By Your Side</span> <span class="t-sep">—</span> <span class="t-artist">Sade</span></li>
+            </ol>
+          </details>
+        </div>
       </div>
 
-      <div class="mix-item" data-category="music">
+            <div class="mix-item" data-category="music">
         <a href="https://youtu.be/IeuXG6yyk0g" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/music22.png" alt="Diggin' on Music 22" loading="lazy"></div>
           <div class="mix-info">
@@ -379,9 +750,43 @@
             <p class="mix-sub">Diggin' on Music</p>
           </div>
         </a>
+        <div class="mix-actions">
+          <details class="tracklist-details" name="mix-tracklist">
+            <summary class="tracklist-toggle">Tracklist</summary>
+            <ol class="tracklist-list">
+              <li><span class="t-title">Tudo Que Voce Podia Ser</span> <span class="t-sep">—</span> <span class="t-artist">Milton Nascimento</span></li>
+              <li><span class="t-title">Contagious (Sconsin Remix)</span> <span class="t-sep">—</span> <span class="t-artist">Crown City Rockers</span></li>
+              <li><span class="t-title">人間発電所</span> <span class="t-sep">—</span> <span class="t-artist">Buddha Brand</span></li>
+              <li><span class="t-title">Not Yet Known</span> <span class="t-sep">—</span> <span class="t-artist">Funky DL</span></li>
+              <li><span class="t-title">Luv Me, Luv Me (feat. Samantha Cole)</span> <span class="t-sep">—</span> <span class="t-artist">Shaggy</span></li>
+              <li><span class="t-title">Deport Them</span> <span class="t-sep">—</span> <span class="t-artist">Sean Paul</span></li>
+              <li><span class="t-title">Bookshelf</span> <span class="t-sep">—</span> <span class="t-artist">Beenie Man</span></li>
+              <li><span class="t-title">Dat Sexy Body</span> <span class="t-sep">—</span> <span class="t-artist">Sasha</span></li>
+              <li><span class="t-title">Money to Burn</span> <span class="t-sep">—</span> <span class="t-artist">T.O.K.</span></li>
+              <li><span class="t-title">U Don&#x27;t Have to Call</span> <span class="t-sep">—</span> <span class="t-artist">USHER</span></li>
+              <li><span class="t-title">SOS (feat. Aloe Blacc)</span> <span class="t-sep">—</span> <span class="t-artist">Avicii</span></li>
+              <li><span class="t-title">One Call Away</span> <span class="t-sep">—</span> <span class="t-artist">Fridayy &amp; Chris Brown</span></li>
+              <li><span class="t-title">I&#x27;m free</span> <span class="t-sep">—</span> <span class="t-artist">Furui Riho</span></li>
+              <li><span class="t-title">繋がったミュージック</span> <span class="t-sep">—</span> <span class="t-artist">ONEGRAM</span></li>
+              <li><span class="t-title">なかいま feat. 鎮座DOPENESS</span> <span class="t-sep">—</span> <span class="t-artist">LIBRO</span></li>
+              <li><span class="t-title">DAY feat. PUNPEE</span> <span class="t-sep">—</span> <span class="t-artist">Nulbarich</span></li>
+              <li><span class="t-title">Fight the Funk</span> <span class="t-sep">—</span> <span class="t-artist">Red Lotus &amp; Akeem Ali</span></li>
+              <li><span class="t-title">In the Middle, Pt. 1 &amp; 2</span> <span class="t-sep">—</span> <span class="t-artist">James Brown &amp; The James Brown Band</span></li>
+              <li><span class="t-title">By the Time I Get to Phoenix</span> <span class="t-sep">—</span> <span class="t-artist">Dorothy Ashby</span></li>
+              <li><span class="t-title">Island Life</span> <span class="t-sep">—</span> <span class="t-artist">Janet Jackson</span></li>
+              <li><span class="t-title">Temporary</span> <span class="t-sep">—</span> <span class="t-artist">Sire</span></li>
+              <li><span class="t-title">All the Way</span> <span class="t-sep">—</span> <span class="t-artist">Craig David</span></li>
+              <li><span class="t-title">After Party</span> <span class="t-sep">—</span> <span class="t-artist">Koffee Brown</span></li>
+              <li><span class="t-title">Thinking of You</span> <span class="t-sep">—</span> <span class="t-artist">Lisa Maxwell</span></li>
+              <li><span class="t-title">No Scrubs S!RENE edit</span> <span class="t-sep">—</span> <span class="t-artist">TLC</span></li>
+              <li><span class="t-title">Brandy (feat. Kyle Dion)</span> <span class="t-sep">—</span> <span class="t-artist">Full Crate</span></li>
+              <li><span class="t-title">Late Night</span> <span class="t-sep">—</span> <span class="t-artist">Lucky Daye</span></li>
+            </ol>
+          </details>
+        </div>
       </div>
 
-      <div class="mix-item" data-category="music">
+            <div class="mix-item" data-category="music">
         <a href="https://youtu.be/mRuEyCn7ELE" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/music20.png" alt="Diggin' on Music 20" loading="lazy"></div>
           <div class="mix-info">
@@ -389,9 +794,40 @@
             <p class="mix-sub">Diggin' on Music</p>
           </div>
         </a>
+        <div class="mix-actions">
+          <details class="tracklist-details" name="mix-tracklist">
+            <summary class="tracklist-toggle">Tracklist</summary>
+            <ol class="tracklist-list">
+              <li><span class="t-title">Dieu Reconnaitra Les Siens</span> <span class="t-sep">—</span> <span class="t-artist">DJ Cam</span></li>
+              <li><span class="t-title">Put You On</span> <span class="t-sep">—</span> <span class="t-artist">Amber Mark &amp; DRAM</span></li>
+              <li><span class="t-title">Girl</span> <span class="t-sep">—</span> <span class="t-artist">Destiny&#x27;s Child</span></li>
+              <li><span class="t-title">0℃の日曜</span> <span class="t-sep">—</span> <span class="t-artist">STUTS×SIKK-O×鈴木真海子</span></li>
+              <li><span class="t-title">屍を越えて</span> <span class="t-sep">—</span> <span class="t-artist">GAGLE</span></li>
+              <li><span class="t-title">untitled 06 l 06.30.2014.</span> <span class="t-sep">—</span> <span class="t-artist">Kendrick Lamar</span></li>
+              <li><span class="t-title">One Day</span> <span class="t-sep">—</span> <span class="t-artist">JBC</span></li>
+              <li><span class="t-title">Baby Pa</span> <span class="t-sep">—</span> <span class="t-artist">Pete Rock &amp; Deda</span></li>
+              <li><span class="t-title">Wouldn&#x27;t Get Far (feat. Kanye West)</span> <span class="t-sep">—</span> <span class="t-artist">The Game</span></li>
+              <li><span class="t-title">in a bubble with u</span> <span class="t-sep">—</span> <span class="t-artist">鈴木真海子</span></li>
+              <li><span class="t-title">I Don&#x27;t Know (feat. Jazzy Jeff)</span> <span class="t-sep">—</span> <span class="t-artist">Slum Village</span></li>
+              <li><span class="t-title">Wonderful</span> <span class="t-sep">—</span> <span class="t-artist">Aretha Franklin</span></li>
+              <li><span class="t-title">Still Believe</span> <span class="t-sep">—</span> <span class="t-artist">Shola Ama</span></li>
+              <li><span class="t-title">The Most Beautifullest Thing In This World</span> <span class="t-sep">—</span> <span class="t-artist">Keith Murray</span></li>
+              <li><span class="t-title">WooHoo (feat. Cookie Plant)</span> <span class="t-sep">—</span> <span class="t-artist">vividboooy</span></li>
+              <li><span class="t-title">Where Is The Love</span> <span class="t-sep">—</span> <span class="t-artist">The Black Eyed Peas</span></li>
+              <li><span class="t-title">ずるくない  (feat. Kan Sano)</span> <span class="t-sep">—</span> <span class="t-artist">ぷにぷに電機</span></li>
+              <li><span class="t-title">Don&#x27;t Look Back In Anger (Down Beat Mix)</span> <span class="t-sep">—</span> <span class="t-artist">Plug Ins</span></li>
+              <li><span class="t-title">Take Me There (Remix)</span> <span class="t-sep">—</span> <span class="t-artist">Blackstreet</span></li>
+              <li><span class="t-title">Next Lifetime</span> <span class="t-sep">—</span> <span class="t-artist">01SAIL &amp; reina</span></li>
+              <li><span class="t-title">流れるままに (feat. suno.ai)</span> <span class="t-sep">—</span> <span class="t-artist">TOKYO BOSE THREE</span></li>
+              <li><span class="t-title">Up &amp; Down</span> <span class="t-sep">—</span> <span class="t-artist">Urbs &amp; Cutex</span></li>
+              <li><span class="t-title">Cloud 9 (DJ Spinna Remix Edit)</span> <span class="t-sep">—</span> <span class="t-artist">Donnie</span></li>
+              <li><span class="t-title">Mornin&#x27;</span> <span class="t-sep">—</span> <span class="t-artist">Al Jarreau</span></li>
+            </ol>
+          </details>
+        </div>
       </div>
 
-      <div class="mix-item" data-category="music">
+            <div class="mix-item" data-category="music">
         <a href="https://youtu.be/spN-EFsR0qM" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/music18.png" alt="Diggin' on Music 18" loading="lazy"></div>
           <div class="mix-info">
@@ -399,9 +835,44 @@
             <p class="mix-sub">Diggin' on Music</p>
           </div>
         </a>
+        <div class="mix-actions">
+          <details class="tracklist-details" name="mix-tracklist">
+            <summary class="tracklist-toggle">Tracklist</summary>
+            <ol class="tracklist-list">
+              <li><span class="t-title">Sunday In Brooklyn (feat. Chanel Loren)</span> <span class="t-sep">—</span> <span class="t-artist">Kota the Friend</span></li>
+              <li><span class="t-title">On The Floor</span> <span class="t-sep">—</span> <span class="t-artist">Mayer Hawthorne</span></li>
+              <li><span class="t-title">Is It Good to You</span> <span class="t-sep">—</span> <span class="t-artist">Teddy Riley &amp; Tammy Lucas</span></li>
+              <li><span class="t-title">Rescue Me (feat. Hazel Fernandes)</span> <span class="t-sep">—</span> <span class="t-artist">Full Flava</span></li>
+              <li><span class="t-title">Now Or Never (feat. Mary J. Blige)</span> <span class="t-sep">—</span> <span class="t-artist">Kendrick Lamar</span></li>
+              <li><span class="t-title">Know Me Better (feat. Bluesforthehorn)</span> <span class="t-sep">—</span> <span class="t-artist">Madd3e</span></li>
+              <li><span class="t-title">Optimistic (feat. Brandy, Common, Robert Glasper &amp; Karriem Riggins)</span> <span class="t-sep">—</span> <span class="t-artist">August Greene</span></li>
+              <li><span class="t-title">I&#x27;m Not Really Lookin&#x27;</span> <span class="t-sep">—</span> <span class="t-artist">DJ Quik &amp; Truth Hurts</span></li>
+              <li><span class="t-title">You Should Be Mine</span> <span class="t-sep">—</span> <span class="t-artist">Roger</span></li>
+              <li><span class="t-title">Crossover</span> <span class="t-sep">—</span> <span class="t-artist">EPMD</span></li>
+              <li><span class="t-title">It&#x27;s Alright (feat. Faith Evans)</span> <span class="t-sep">—</span> <span class="t-artist">Queen Latifah</span></li>
+              <li><span class="t-title">シグナル (光の当て方次第影の形) feat. 元晴</span> <span class="t-sep">—</span> <span class="t-artist">LIBRO</span></li>
+              <li><span class="t-title">Still</span> <span class="t-sep">—</span> <span class="t-artist">Kenyon Dixon</span></li>
+              <li><span class="t-title">Commas</span> <span class="t-sep">—</span> <span class="t-artist">Ayra Starr</span></li>
+              <li><span class="t-title">My Queen</span> <span class="t-sep">—</span> <span class="t-artist">Punipunidenki, Mikeneko Homeless &amp; Shin Sakiura</span></li>
+              <li><span class="t-title">One of these nights (feat. Jua)</span> <span class="t-sep">—</span> <span class="t-artist">VivaOla</span></li>
+              <li><span class="t-title">Fine China</span> <span class="t-sep">—</span> <span class="t-artist">Chris Brown</span></li>
+              <li><span class="t-title">Easy (feat. Wild)</span> <span class="t-sep">—</span> <span class="t-artist">Haven</span></li>
+              <li><span class="t-title">Star</span> <span class="t-sep">—</span> <span class="t-artist">Jessica Peros</span></li>
+              <li><span class="t-title">Music (feat. Marvin Gaye)</span> <span class="t-sep">—</span> <span class="t-artist">Erick Sermon</span></li>
+              <li><span class="t-title">Stand By Me (Radio Edit)</span> <span class="t-sep">—</span> <span class="t-artist">Brownstone</span></li>
+              <li><span class="t-title">Roadside (+234 Remix) [feat. Rema &amp; Ayra Starr]</span> <span class="t-sep">—</span> <span class="t-artist">Mahalia</span></li>
+              <li><span class="t-title">My Way (feat. Sean Paul)</span> <span class="t-sep">—</span> <span class="t-artist">Demarco</span></li>
+              <li><span class="t-title">Mas Que Nada (feat. Black Eyed Peas)</span> <span class="t-sep">—</span> <span class="t-artist">Sergio Mendes</span></li>
+              <li><span class="t-title">Ain’t No Fun (If the Homies Can’t Have None) [feat. Nate Dogg, Warren G &amp; Kurupt]</span> <span class="t-sep">—</span> <span class="t-artist">Snoop Dogg</span></li>
+              <li><span class="t-title">Kicking It</span> <span class="t-sep">—</span> <span class="t-artist">After 7</span></li>
+              <li><span class="t-title">Loungin (Who Do Ya Luv) [Remix]</span> <span class="t-sep">—</span> <span class="t-artist">LL Cool J</span></li>
+              <li><span class="t-title">Let It All Hang Out</span> <span class="t-sep">—</span> <span class="t-artist">A.D.O.R.</span></li>
+            </ol>
+          </details>
+        </div>
       </div>
 
-      <div class="mix-item" data-category="music">
+            <div class="mix-item" data-category="music">
         <a href="https://youtu.be/UH3K17ODDzg" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/music17.png" alt="Diggin' on Music 17" loading="lazy"></div>
           <div class="mix-info">
@@ -409,9 +880,45 @@
             <p class="mix-sub">Diggin' on Music</p>
           </div>
         </a>
+        <div class="mix-actions">
+          <details class="tracklist-details" name="mix-tracklist">
+            <summary class="tracklist-toggle">Tracklist</summary>
+            <ol class="tracklist-list">
+              <li><span class="t-title">HUMBLE FLEX</span> <span class="t-sep">—</span> <span class="t-artist">Red Lotus</span></li>
+              <li><span class="t-title">Yeern 101</span> <span class="t-sep">—</span> <span class="t-artist">ScHoolboy Q</span></li>
+              <li><span class="t-title">Homicide (feat. Eminem)</span> <span class="t-sep">—</span> <span class="t-artist">Logic</span></li>
+              <li><span class="t-title">5 Percenters</span> <span class="t-sep">—</span> <span class="t-artist">Kota the Friend</span></li>
+              <li><span class="t-title">Underdog</span> <span class="t-sep">—</span> <span class="t-artist">Roddy Ricch</span></li>
+              <li><span class="t-title">Can&#x27;t Hide It (feat. Jhené Aiko)</span> <span class="t-sep">—</span> <span class="t-artist">Lil Durk</span></li>
+              <li><span class="t-title">BAND4BAND</span> <span class="t-sep">—</span> <span class="t-artist">Central Cee &amp; Lil Baby</span></li>
+              <li><span class="t-title">prove it</span> <span class="t-sep">—</span> <span class="t-artist">21 Savage &amp; Summer Walker</span></li>
+              <li><span class="t-title">Superstar Status</span> <span class="t-sep">—</span> <span class="t-artist">lougotcash, Bobby Shmurda &amp; Jeremih</span></li>
+              <li><span class="t-title">Switching Positions</span> <span class="t-sep">—</span> <span class="t-artist">Landstrip Chip &amp; Vory</span></li>
+              <li><span class="t-title">BOSS COFFEE (feat. Lord Sko) [Remix]</span> <span class="t-sep">—</span> <span class="t-artist">Yoshi T. &amp; LIFEOFTHOM</span></li>
+              <li><span class="t-title">Yeah Glo!</span> <span class="t-sep">—</span> <span class="t-artist">GloRilla</span></li>
+              <li><span class="t-title">Surround Sound (feat. 21 Savage &amp; Baby Tate)</span> <span class="t-sep">—</span> <span class="t-artist">JID</span></li>
+              <li><span class="t-title">No Sweat</span> <span class="t-sep">—</span> <span class="t-artist">Key Glock</span></li>
+              <li><span class="t-title">Play No Games (feat. Chris Brown &amp; Ty Dolla $ign)</span> <span class="t-sep">—</span> <span class="t-artist">Big Sean</span></li>
+              <li><span class="t-title">Plain Jane</span> <span class="t-sep">—</span> <span class="t-artist">A$AP Ferg</span></li>
+              <li><span class="t-title">For the Fame (feat. Jayd Ink)</span> <span class="t-sep">—</span> <span class="t-artist">Cortez</span></li>
+              <li><span class="t-title">redrum</span> <span class="t-sep">—</span> <span class="t-artist">21 Savage</span></li>
+              <li><span class="t-title">Use Me</span> <span class="t-sep">—</span> <span class="t-artist">Bow Wow &amp; Chris Brown</span></li>
+              <li><span class="t-title">Waiting On You (Intro)</span> <span class="t-sep">—</span> <span class="t-artist">Beatsbyachraf</span></li>
+              <li><span class="t-title">DENIAL IS A RIVER</span> <span class="t-sep">—</span> <span class="t-artist">Doechii</span></li>
+              <li><span class="t-title">MAKE IT OUT!</span> <span class="t-sep">—</span> <span class="t-artist">Yoshi T.</span></li>
+              <li><span class="t-title">Shanghai Dreams</span> <span class="t-sep">—</span> <span class="t-artist">EVISBEATS, Nagipan</span></li>
+              <li><span class="t-title">5 Dollar Pony Rides</span> <span class="t-sep">—</span> <span class="t-artist">Mac Miller</span></li>
+              <li><span class="t-title">LETTER 4 BETTER feat. ZORN</span> <span class="t-sep">—</span> <span class="t-artist">tha BOSS</span></li>
+              <li><span class="t-title">Too Many Women (feat. kwn)</span> <span class="t-sep">—</span> <span class="t-artist">Jordan Adetunji</span></li>
+              <li><span class="t-title">Not Like Us</span> <span class="t-sep">—</span> <span class="t-artist">Kendrick Lamar</span></li>
+              <li><span class="t-title">Dark Thoughts</span> <span class="t-sep">—</span> <span class="t-artist">Lil Tecca</span></li>
+              <li><span class="t-title">squabble up</span> <span class="t-sep">—</span> <span class="t-artist">Kendrick Lamar</span></li>
+            </ol>
+          </details>
+        </div>
       </div>
 
-      <div class="mix-item" data-category="music">
+            <div class="mix-item" data-category="music">
         <a href="https://youtu.be/XJg13pu1bwE" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/music16.png" alt="Diggin' on Music 16" loading="lazy"></div>
           <div class="mix-info">
@@ -419,9 +926,41 @@
             <p class="mix-sub">Diggin' on Music</p>
           </div>
         </a>
+        <div class="mix-actions">
+          <details class="tracklist-details" name="mix-tracklist">
+            <summary class="tracklist-toggle">Tracklist</summary>
+            <ol class="tracklist-list">
+              <li><span class="t-title">Meditation (feat. 鎮座DOPENESS)</span> <span class="t-sep">—</span> <span class="t-artist">ASOUND</span></li>
+              <li><span class="t-title">Paradise</span> <span class="t-sep">—</span> <span class="t-artist">Jean Adebambo</span></li>
+              <li><span class="t-title">Passion Love</span> <span class="t-sep">—</span> <span class="t-artist">The Melodians</span></li>
+              <li><span class="t-title">Moni Moni</span> <span class="t-sep">—</span> <span class="t-artist">ASOUND</span></li>
+              <li><span class="t-title">いかれたBaby</span> <span class="t-sep">—</span> <span class="t-artist">Kan Sano</span></li>
+              <li><span class="t-title">LALA (Unlocked) [feat. Swae Lee]</span> <span class="t-sep">—</span> <span class="t-artist">Alicia Keys</span></li>
+              <li><span class="t-title">5月のうみ</span> <span class="t-sep">—</span> <span class="t-artist">鈴木真海子</span></li>
+              <li><span class="t-title">甘い運命</span> <span class="t-sep">—</span> <span class="t-artist">UA</span></li>
+              <li><span class="t-title">Lights Out</span> <span class="t-sep">—</span> <span class="t-artist">Estelle</span></li>
+              <li><span class="t-title">SWEET TIME (feat. MOJAH)</span> <span class="t-sep">—</span> <span class="t-artist">DIGITAL NINJA</span></li>
+              <li><span class="t-title">Reggaeで君も踊らないか  (feat. J-REXXX)</span> <span class="t-sep">—</span> <span class="t-artist">ONEDER</span></li>
+              <li><span class="t-title">Smile Jamaica</span> <span class="t-sep">—</span> <span class="t-artist">Chronixx</span></li>
+              <li><span class="t-title">Just One Of Those Days</span> <span class="t-sep">—</span> <span class="t-artist">Sizzla</span></li>
+              <li><span class="t-title">Jah Blessing (feat. Luciano)</span> <span class="t-sep">—</span> <span class="t-artist">SIZZLA</span></li>
+              <li><span class="t-title">Liquor Store Blues (feat. Damian &#x27;Jr. Gong&#x27; Marley)</span> <span class="t-sep">—</span> <span class="t-artist">Bruno Mars</span></li>
+              <li><span class="t-title">Don&#x27;t Let Go</span> <span class="t-sep">—</span> <span class="t-artist">Spawnbreezie</span></li>
+              <li><span class="t-title">Shining Star</span> <span class="t-sep">—</span> <span class="t-artist">Eddie Lovette</span></li>
+              <li><span class="t-title">Just Be Good</span> <span class="t-sep">—</span> <span class="t-artist">Half Pint</span></li>
+              <li><span class="t-title">Baby Only You (feat. Fiji)</span> <span class="t-sep">—</span> <span class="t-artist">Kiani</span></li>
+              <li><span class="t-title">アイの実</span> <span class="t-sep">—</span> <span class="t-artist">MINMI</span></li>
+              <li><span class="t-title">Strawberry Girl</span> <span class="t-sep">—</span> <span class="t-artist">Youth of Roots</span></li>
+              <li><span class="t-title">Cool &amp; Easy</span> <span class="t-sep">—</span> <span class="t-artist">Chris Malachi &amp; The Autos</span></li>
+              <li><span class="t-title">Spanish Town Rockin&#x27;</span> <span class="t-sep">—</span> <span class="t-artist">Chronixx</span></li>
+              <li><span class="t-title">Storm Is Over</span> <span class="t-sep">—</span> <span class="t-artist">Terry Linen</span></li>
+              <li><span class="t-title">Ride On (feat. ARIWA)</span> <span class="t-sep">—</span> <span class="t-artist">buzzy.</span></li>
+            </ol>
+          </details>
+        </div>
       </div>
 
-      <div class="mix-item" data-category="music">
+            <div class="mix-item" data-category="music">
         <a href="https://youtu.be/Pno7z7Ng9MI" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/music14.png" alt="Diggin' on Music 14" loading="lazy"></div>
           <div class="mix-info">
@@ -429,9 +968,42 @@
             <p class="mix-sub">Diggin' on Music</p>
           </div>
         </a>
+        <div class="mix-actions">
+          <details class="tracklist-details" name="mix-tracklist">
+            <summary class="tracklist-toggle">Tracklist</summary>
+            <ol class="tracklist-list">
+              <li><span class="t-title">Open the Door</span> <span class="t-sep">—</span> <span class="t-artist">FKJ</span></li>
+              <li><span class="t-title">Take You There</span> <span class="t-sep">—</span> <span class="t-artist">V. Cartier</span></li>
+              <li><span class="t-title">Set It Free</span> <span class="t-sep">—</span> <span class="t-artist">Common &amp; PJ</span></li>
+              <li><span class="t-title">Can&#x27;t Feel My Face</span> <span class="t-sep">—</span> <span class="t-artist">The Weeknd</span></li>
+              <li><span class="t-title">Anything</span> <span class="t-sep">—</span> <span class="t-artist">Davido</span></li>
+              <li><span class="t-title">Rainy Runway</span> <span class="t-sep">—</span> <span class="t-artist">KIRINJI</span></li>
+              <li><span class="t-title">I say bye</span> <span class="t-sep">—</span> <span class="t-artist">imase</span></li>
+              <li><span class="t-title">Beijo (Interlude)</span> <span class="t-sep">—</span> <span class="t-artist">Earth, Wind &amp; Fire</span></li>
+              <li><span class="t-title">Say So</span> <span class="t-sep">—</span> <span class="t-artist">Doja Cat</span></li>
+              <li><span class="t-title">The Walk (feat. Rizzle Kicks)</span> <span class="t-sep">—</span> <span class="t-artist">Mayer Hawthorne</span></li>
+              <li><span class="t-title">no song without you (Cosmo&#x27;s Midnight Remix)</span> <span class="t-sep">—</span> <span class="t-artist">HONNE</span></li>
+              <li><span class="t-title">Say Cheese</span> <span class="t-sep">—</span> <span class="t-artist">Paul Russell</span></li>
+              <li><span class="t-title">STAY (feat. Noni)</span> <span class="t-sep">—</span> <span class="t-artist">Kenny Gabriel</span></li>
+              <li><span class="t-title">Halfcrazy (Remix)</span> <span class="t-sep">—</span> <span class="t-artist">Musiq</span></li>
+              <li><span class="t-title">In the Morning</span> <span class="t-sep">—</span> <span class="t-artist">Jay Prince</span></li>
+              <li><span class="t-title">Entardecer</span> <span class="t-sep">—</span> <span class="t-artist">John Beltran</span></li>
+              <li><span class="t-title">It Runs Through Me (feat. De La Soul)</span> <span class="t-sep">—</span> <span class="t-artist">Tom Misch</span></li>
+              <li><span class="t-title">Crazy Dream (feat. Loyle Carner)</span> <span class="t-sep">—</span> <span class="t-artist">Tom Misch</span></li>
+              <li><span class="t-title">Home Is Where the Hatred Is (Featuring Vicki Anderson)</span> <span class="t-sep">—</span> <span class="t-artist">Bossa Nostra &amp; Vicki Anderson</span></li>
+              <li><span class="t-title">接吻</span> <span class="t-sep">—</span> <span class="t-artist">Original Love &amp; Ovall</span></li>
+              <li><span class="t-title">ダンスに間に合う</span> <span class="t-sep">—</span> <span class="t-artist">思い出野郎Aチーム</span></li>
+              <li><span class="t-title">Mind Blowing Decisions</span> <span class="t-sep">—</span> <span class="t-artist">Heatwave</span></li>
+              <li><span class="t-title">Perfidia (with Tommy McCook &amp; the Supersonics)</span> <span class="t-sep">—</span> <span class="t-artist">Phyllis Dillon</span></li>
+              <li><span class="t-title">Wonderful Tonight</span> <span class="t-sep">—</span> <span class="t-artist">Kotch</span></li>
+              <li><span class="t-title">The Loser</span> <span class="t-sep">—</span> <span class="t-artist">Derrick Harriott</span></li>
+              <li><span class="t-title">Just Don&#x27;t Want to Be Lonely</span> <span class="t-sep">—</span> <span class="t-artist">Freddie McGregor</span></li>
+            </ol>
+          </details>
+        </div>
       </div>
 
-      <div class="mix-item" data-category="music">
+            <div class="mix-item" data-category="music">
         <a href="https://youtu.be/EzIGOHxFmhw" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/music12.png" alt="Diggin' on Music 12" loading="lazy"></div>
           <div class="mix-info">
@@ -439,9 +1011,44 @@
             <p class="mix-sub">Diggin' on Music</p>
           </div>
         </a>
+        <div class="mix-actions">
+          <details class="tracklist-details" name="mix-tracklist">
+            <summary class="tracklist-toggle">Tracklist</summary>
+            <ol class="tracklist-list">
+              <li><span class="t-title">Mr Right</span> <span class="t-sep">—</span> <span class="t-artist">Mae Stephens &amp; Meghan Trainor</span></li>
+              <li><span class="t-title">The End Of The Days (feat. 唾奇)</span> <span class="t-sep">—</span> <span class="t-artist">Gotch</span></li>
+              <li><span class="t-title">Better Days (feat. Aloe Blacc)</span> <span class="t-sep">—</span> <span class="t-artist">MESTO</span></li>
+              <li><span class="t-title">After Party</span> <span class="t-sep">—</span> <span class="t-artist">Koffee Brown</span></li>
+              <li><span class="t-title">おちつけ</span> <span class="t-sep">—</span> <span class="t-artist">三浦透子</span></li>
+              <li><span class="t-title">Go!</span> <span class="t-sep">—</span> <span class="t-artist">Common</span></li>
+              <li><span class="t-title">Turn It Up</span> <span class="t-sep">—</span> <span class="t-artist">Ugly Duckling</span></li>
+              <li><span class="t-title">93 &#x27;Til Infinity</span> <span class="t-sep">—</span> <span class="t-artist">SOULS OF MISCHIEF</span></li>
+              <li><span class="t-title">Carioca Moon</span> <span class="t-sep">—</span> <span class="t-artist">A.Y.B. Force</span></li>
+              <li><span class="t-title">Come with me</span> <span class="t-sep">—</span> <span class="t-artist">Ronny Jordan</span></li>
+              <li><span class="t-title">Funky President (People It&#x27;s Bad)</span> <span class="t-sep">—</span> <span class="t-artist">James Brown</span></li>
+              <li><span class="t-title">Superstition (Single Version)</span> <span class="t-sep">—</span> <span class="t-artist">Stevie Wonder</span></li>
+              <li><span class="t-title">Tricka Technology (feat. TC Izlam)</span> <span class="t-sep">—</span> <span class="t-artist">A. Skillz &amp; Krafty Kuts</span></li>
+              <li><span class="t-title">Forthenight (feat. Aaries)</span> <span class="t-sep">—</span> <span class="t-artist">Musiq</span></li>
+              <li><span class="t-title">The Weekend</span> <span class="t-sep">—</span> <span class="t-artist">88rising &amp; BIBI</span></li>
+              <li><span class="t-title">Come Over</span> <span class="t-sep">—</span> <span class="t-artist">VanJess</span></li>
+              <li><span class="t-title">Count Your Blessings</span> <span class="t-sep">—</span> <span class="t-artist">Nas</span></li>
+              <li><span class="t-title">Rule</span> <span class="t-sep">—</span> <span class="t-artist">Nas</span></li>
+              <li><span class="t-title">Hold On, We&#x27;re Going Home (feat. Majid Jordan)</span> <span class="t-sep">—</span> <span class="t-artist">Drake</span></li>
+              <li><span class="t-title">I Just Wanna Love U (Give It 2 Me)</span> <span class="t-sep">—</span> <span class="t-artist">JAY-Z</span></li>
+              <li><span class="t-title">Star</span> <span class="t-sep">—</span> <span class="t-artist">702</span></li>
+              <li><span class="t-title">Lovely Day (7&#x27; Sunshine Mix)</span> <span class="t-sep">—</span> <span class="t-artist">Bill Withers</span></li>
+              <li><span class="t-title">Girlfriend</span> <span class="t-sep">—</span> <span class="t-artist">Billie</span></li>
+              <li><span class="t-title">Girlfriend (D-Influence Real Live Mix)</span> <span class="t-sep">—</span> <span class="t-artist">Billie Piper</span></li>
+              <li><span class="t-title">Don&#x27;t Mess With My Man (feat. Nivea &amp; Brian Casey)</span> <span class="t-sep">—</span> <span class="t-artist">Scioneaux</span></li>
+              <li><span class="t-title">Blue Jeans</span> <span class="t-sep">—</span> <span class="t-artist">Yasmeen</span></li>
+              <li><span class="t-title">Romance</span> <span class="t-sep">—</span> <span class="t-artist">Tokyo Gal</span></li>
+              <li><span class="t-title">If I Ain&#x27;t Got You (Black Eyed Peas Remix)</span> <span class="t-sep">—</span> <span class="t-artist">Alicia Keys</span></li>
+            </ol>
+          </details>
+        </div>
       </div>
 
-      <div class="mix-item" data-category="music">
+            <div class="mix-item" data-category="music">
         <a href="https://youtu.be/4JvmzwvIGfQ" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/music11.png" alt="Diggin' on Music 11" loading="lazy"></div>
           <div class="mix-info">
@@ -449,9 +1056,43 @@
             <p class="mix-sub">Diggin' on Music</p>
           </div>
         </a>
+        <div class="mix-actions">
+          <details class="tracklist-details" name="mix-tracklist">
+            <summary class="tracklist-toggle">Tracklist</summary>
+            <ol class="tracklist-list">
+              <li><span class="t-title">いちょう並木のセレナーデ (reprise - 2024 Remaster)</span> <span class="t-sep">—</span> <span class="t-artist">小沢健二</span></li>
+              <li><span class="t-title">いちょう並木のセレナーデ (2024 Remaster)</span> <span class="t-sep">—</span> <span class="t-artist">小沢健二</span></li>
+              <li><span class="t-title">Hello, my friend</span> <span class="t-sep">—</span> <span class="t-artist">PUSHIM</span></li>
+              <li><span class="t-title">雪の華 (REGGAE DISCO ROCKERS FLOWER&#x27;S MIX)</span> <span class="t-sep">—</span> <span class="t-artist">Mika Nakashima</span></li>
+              <li><span class="t-title">NEVER DIS THE MAN</span> <span class="t-sep">—</span> <span class="t-artist">SANCHEZ</span></li>
+              <li><span class="t-title">Tempted to Touch</span> <span class="t-sep">—</span> <span class="t-artist">Beres Hammond</span></li>
+              <li><span class="t-title">Rock Away</span> <span class="t-sep">—</span> <span class="t-artist">Beres Hammond</span></li>
+              <li><span class="t-title">Sweet Life</span> <span class="t-sep">—</span> <span class="t-artist">CocoaTea</span></li>
+              <li><span class="t-title">Lonely Night</span> <span class="t-sep">—</span> <span class="t-artist">大門弥生</span></li>
+              <li><span class="t-title">SUMMER END</span> <span class="t-sep">—</span> <span class="t-artist">iri</span></li>
+              <li><span class="t-title">Whipped Cream</span> <span class="t-sep">—</span> <span class="t-artist">Ari Lennox</span></li>
+              <li><span class="t-title">Summer 2020</span> <span class="t-sep">—</span> <span class="t-artist">Jhene Aiko</span></li>
+              <li><span class="t-title">Sweet Distraction</span> <span class="t-sep">—</span> <span class="t-artist">Sam Wills, Cofi Stone &amp; Jake Milliner</span></li>
+              <li><span class="t-title">Video</span> <span class="t-sep">—</span> <span class="t-artist">India.Arie</span></li>
+              <li><span class="t-title">Playing for You (feat. Bassette)</span> <span class="t-sep">—</span> <span class="t-artist">Joe Hertz</span></li>
+              <li><span class="t-title">Try</span> <span class="t-sep">—</span> <span class="t-artist">Jill Scott</span></li>
+              <li><span class="t-title">Focus (feat. 鈴木真海子)</span> <span class="t-sep">—</span> <span class="t-artist">荒谷翔大 &amp; TOSHIKI HAYASHI(%C)</span></li>
+              <li><span class="t-title">Change</span> <span class="t-sep">—</span> <span class="t-artist">Arin Ray &amp; Kehlani</span></li>
+              <li><span class="t-title">Sugar (feat. Larry June &amp; SHOW N PROVE)</span> <span class="t-sep">—</span> <span class="t-artist">Nippa</span></li>
+              <li><span class="t-title">Yo (Excuse Me Miss)</span> <span class="t-sep">—</span> <span class="t-artist">Chris Brown</span></li>
+              <li><span class="t-title">Fractal Spirits (Moo Latte Remix)</span> <span class="t-sep">—</span> <span class="t-artist">Soia &amp; Moo Latte</span></li>
+              <li><span class="t-title">The Doo-Bop Song (Remastered)</span> <span class="t-sep">—</span> <span class="t-artist">Miles Davis</span></li>
+              <li><span class="t-title">Lost One (feat. Chrisette Michele)</span> <span class="t-sep">—</span> <span class="t-artist">Jay-Z</span></li>
+              <li><span class="t-title">Brick By Brick (feat. Blu)</span> <span class="t-sep">—</span> <span class="t-artist">Kota the Friend &amp; Statik Selektah</span></li>
+              <li><span class="t-title">Real Ones</span> <span class="t-sep">—</span> <span class="t-artist">Kota the Friend &amp; Statik Selektah</span></li>
+              <li><span class="t-title">The Message (feat. Mary J. Blige &amp; Rell)</span> <span class="t-sep">—</span> <span class="t-artist">Dr. Dre</span></li>
+              <li><span class="t-title">Mrs. Officer (feat. Bobby Valentino &amp; Kidd Kidd)</span> <span class="t-sep">—</span> <span class="t-artist">Lil Wayne</span></li>
+            </ol>
+          </details>
+        </div>
       </div>
 
-      <div class="mix-item" data-category="music">
+            <div class="mix-item" data-category="music">
         <a href="https://youtu.be/-XUKefQnKrs" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/music10.png" alt="Diggin' on Music 10" loading="lazy"></div>
           <div class="mix-info">
@@ -459,9 +1100,43 @@
             <p class="mix-sub">Diggin' on Music</p>
           </div>
         </a>
+        <div class="mix-actions">
+          <details class="tracklist-details" name="mix-tracklist">
+            <summary class="tracklist-toggle">Tracklist</summary>
+            <ol class="tracklist-list">
+              <li><span class="t-title">Feel Like Makin&#x27; Love</span> <span class="t-sep">—</span> <span class="t-artist">D&#x27;Angelo</span></li>
+              <li><span class="t-title">Show Me</span> <span class="t-sep">—</span> <span class="t-artist">Mac Ayres &amp; Chris Anderson</span></li>
+              <li><span class="t-title">Focus</span> <span class="t-sep">—</span> <span class="t-artist">H.E.R.</span></li>
+              <li><span class="t-title">See, Saw (feat. GAGLE)</span> <span class="t-sep">—</span> <span class="t-artist">Sweet William</span></li>
+              <li><span class="t-title">Kissin&#x27; You - Oh Honey</span> <span class="t-sep">—</span> <span class="t-artist">Total</span></li>
+              <li><span class="t-title">Horizon</span> <span class="t-sep">—</span> <span class="t-artist">Saiko &amp; Willis.</span></li>
+              <li><span class="t-title">珈琲 (feat. PUNPEE)</span> <span class="t-sep">—</span> <span class="t-artist">NORIKIYO</span></li>
+              <li><span class="t-title">夢の続き feat. 田我流</span> <span class="t-sep">—</span> <span class="t-artist">EVISBEATS</span></li>
+              <li><span class="t-title">How Deep Is Your Love</span> <span class="t-sep">—</span> <span class="t-artist">PJ Morton</span></li>
+              <li><span class="t-title">Feel Me Flow (Re-recorded Version)</span> <span class="t-sep">—</span> <span class="t-artist">Naughty By Nature</span></li>
+              <li><span class="t-title">Virtual Insanity (Salaam Remi Remix)</span> <span class="t-sep">—</span> <span class="t-artist">Jamiroquai</span></li>
+              <li><span class="t-title">Hold My Hand (with Akon)</span> <span class="t-sep">—</span> <span class="t-artist">Michael Jackson</span></li>
+              <li><span class="t-title">Vibin&#x27; (Cool Summer Mellow Mix)</span> <span class="t-sep">—</span> <span class="t-artist">Boyz II Men</span></li>
+              <li><span class="t-title">It&#x27;s a Party (feat. Zhane)</span> <span class="t-sep">—</span> <span class="t-artist">Busta Rhymes &amp; Zhane</span></li>
+              <li><span class="t-title">Switch</span> <span class="t-sep">—</span> <span class="t-artist">TLC</span></li>
+              <li><span class="t-title">Let Me Blow Ya Mind (feat. Gwen Stefani &amp; Stevie J.)</span> <span class="t-sep">—</span> <span class="t-artist">Eve</span></li>
+              <li><span class="t-title">21 Questions (feat. Nate Dogg)</span> <span class="t-sep">—</span> <span class="t-artist">50 Cent</span></li>
+              <li><span class="t-title">Excuse Me Miss</span> <span class="t-sep">—</span> <span class="t-artist">JAY-Z</span></li>
+              <li><span class="t-title">Talkin&#x27; to Me (Mark Ronson Sunshine Remix)</span> <span class="t-sep">—</span> <span class="t-artist">Amerie</span></li>
+              <li><span class="t-title">Sittin&#x27; Up In My Room (from Waiting to Exhale - Original Soundtrack)</span> <span class="t-sep">—</span> <span class="t-artist">Brandy</span></li>
+              <li><span class="t-title">You Know That I Love You</span> <span class="t-sep">—</span> <span class="t-artist">Donell Jones</span></li>
+              <li><span class="t-title">Hate That I Love You (feat. Ne-Yo)</span> <span class="t-sep">—</span> <span class="t-artist">Rihanna</span></li>
+              <li><span class="t-title">Whatever</span> <span class="t-sep">—</span> <span class="t-artist">Old Nick AKA DJ HASEBE</span></li>
+              <li><span class="t-title">Hey (Springtime Radio Edit)</span> <span class="t-sep">—</span> <span class="t-artist">Fatima Rainey</span></li>
+              <li><span class="t-title">Honey</span> <span class="t-sep">—</span> <span class="t-artist">Mariah Carey</span></li>
+              <li><span class="t-title">Automatic (Remastered 2014)</span> <span class="t-sep">—</span> <span class="t-artist">宇多田ヒカル</span></li>
+              <li><span class="t-title">I Love Your Smile</span> <span class="t-sep">—</span> <span class="t-artist">Shanice</span></li>
+            </ol>
+          </details>
+        </div>
       </div>
 
-      <div class="mix-item" data-category="music">
+            <div class="mix-item" data-category="music">
         <a href="https://youtu.be/cTM6qKR2UhU" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/music9.png" alt="Diggin' on Music 9" loading="lazy"></div>
           <div class="mix-info">
@@ -469,9 +1144,42 @@
             <p class="mix-sub">Diggin' on Music</p>
           </div>
         </a>
+        <div class="mix-actions">
+          <details class="tracklist-details" name="mix-tracklist">
+            <summary class="tracklist-toggle">Tracklist</summary>
+            <ol class="tracklist-list">
+              <li><span class="t-title">Gonna Be (Ben Human Remix)</span> <span class="t-sep">—</span> <span class="t-artist">MO&#x27; HORIZONS</span></li>
+              <li><span class="t-title">The Shakedown (Say Yeah)</span> <span class="t-sep">—</span> <span class="t-artist">Speedometer</span></li>
+              <li><span class="t-title">Save a Lil Love (feat. Eric Roberson)</span> <span class="t-sep">—</span> <span class="t-artist">Reel People</span></li>
+              <li><span class="t-title">Feel</span> <span class="t-sep">—</span> <span class="t-artist">Peter Spacey &amp; Danny Feels</span></li>
+              <li><span class="t-title">The Motions (A-Side)</span> <span class="t-sep">—</span> <span class="t-artist">Langston Bleu</span></li>
+              <li><span class="t-title">Red Lights</span> <span class="t-sep">—</span> <span class="t-artist">Kota the Friend &amp; Hello O&#x27;shay</span></li>
+              <li><span class="t-title">Tints (feat. Kendrick Lamar)</span> <span class="t-sep">—</span> <span class="t-artist">Anderson .Paak</span></li>
+              <li><span class="t-title">Rendezvous</span> <span class="t-sep">—</span> <span class="t-artist">Jenevieve</span></li>
+              <li><span class="t-title">Angel</span> <span class="t-sep">—</span> <span class="t-artist">Pharrell Williams</span></li>
+              <li><span class="t-title">Get Off (feat. Daichi Yamamoto &amp; Kzyboost)</span> <span class="t-sep">—</span> <span class="t-artist">grooveman Spot</span></li>
+              <li><span class="t-title">In the Night</span> <span class="t-sep">—</span> <span class="t-artist">Cheryl Lynn</span></li>
+              <li><span class="t-title">Never Too Much</span> <span class="t-sep">—</span> <span class="t-artist">Luther Vandross</span></li>
+              <li><span class="t-title">Make This A Special Night (Harding&#x27;s Special Magical Night Mix)</span> <span class="t-sep">—</span> <span class="t-artist">The Cool Notes</span></li>
+              <li><span class="t-title">I Dream, I Dream (Remix Extended Version)</span> <span class="t-sep">—</span> <span class="t-artist">Jermaine Jackson</span></li>
+              <li><span class="t-title">If I Had No Loot</span> <span class="t-sep">—</span> <span class="t-artist">Tony! Toni! Tone!</span></li>
+              <li><span class="t-title">Turn Me On</span> <span class="t-sep">—</span> <span class="t-artist">Kevin Lyttle</span></li>
+              <li><span class="t-title">No Letting Go</span> <span class="t-sep">—</span> <span class="t-artist">Wayne Wonder</span></li>
+              <li><span class="t-title">An 8 Ball Affair</span> <span class="t-sep">—</span> <span class="t-artist">Flamingosis</span></li>
+              <li><span class="t-title">NO CONECTION B-JR</span> <span class="t-sep">—</span> <span class="t-artist">HALFBY</span></li>
+              <li><span class="t-title">茶柱</span> <span class="t-sep">—</span> <span class="t-artist">ザ・おめでたズ</span></li>
+              <li><span class="t-title">お茶</span> <span class="t-sep">—</span> <span class="t-artist">UA</span></li>
+              <li><span class="t-title">jam (with iri)</span> <span class="t-sep">—</span> <span class="t-artist">milet</span></li>
+              <li><span class="t-title">Sexual (feat. Dyo)</span> <span class="t-sep">—</span> <span class="t-artist">NEIKED</span></li>
+              <li><span class="t-title">Autumn in Paris</span> <span class="t-sep">—</span> <span class="t-artist">Kota the Friend &amp; Braxton Cook</span></li>
+              <li><span class="t-title">Rock with You (feat. Brandy &amp; Heavy D)</span> <span class="t-sep">—</span> <span class="t-artist">Quincy Jones</span></li>
+              <li><span class="t-title">Something in Common (feat. Whitney Houston)</span> <span class="t-sep">—</span> <span class="t-artist">Bobby Brown</span></li>
+            </ol>
+          </details>
+        </div>
       </div>
 
-      <div class="mix-item" data-category="music">
+            <div class="mix-item" data-category="music">
         <a href="https://youtu.be/4nz56it-oWM" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/music8.jpg" alt="Diggin' on Music 8" loading="lazy"></div>
           <div class="mix-info">
@@ -479,9 +1187,42 @@
             <p class="mix-sub">Diggin' on Music</p>
           </div>
         </a>
+        <div class="mix-actions">
+          <details class="tracklist-details" name="mix-tracklist">
+            <summary class="tracklist-toggle">Tracklist</summary>
+            <ol class="tracklist-list">
+              <li><span class="t-title">GOOD VIBRATION</span> <span class="t-sep">—</span> <span class="t-artist">ASOUND</span></li>
+              <li><span class="t-title">いい時間</span> <span class="t-sep">—</span> <span class="t-artist">EVISBEATS</span></li>
+              <li><span class="t-title">Summer Madness</span> <span class="t-sep">—</span> <span class="t-artist">Mato</span></li>
+              <li><span class="t-title">Nothing&#x27;s Gonna Change My Love for You</span> <span class="t-sep">—</span> <span class="t-artist">SANCHEZ</span></li>
+              <li><span class="t-title">That&#x27;s the Way It Is</span> <span class="t-sep">—</span> <span class="t-artist">Terry Linen</span></li>
+              <li><span class="t-title">歩いて行こう 〜Looking For The Brand New Day〜(KINGSTON 10 DUB MIX)</span> <span class="t-sep">—</span> <span class="t-artist">MOOMIN</span></li>
+              <li><span class="t-title">Don&#x27;t Dream It&#x27;s Over</span> <span class="t-sep">—</span> <span class="t-artist">Stanryck</span></li>
+              <li><span class="t-title">Don&#x27;t Throw It All Away</span> <span class="t-sep">—</span> <span class="t-artist">BARRINGTON LEVY</span></li>
+              <li><span class="t-title">Love You Like That (Someone Loves You Honey)</span> <span class="t-sep">—</span> <span class="t-artist">Junior Kelly</span></li>
+              <li><span class="t-title">Reggae Music Haffi Play (feat. PAPA U-Gee, Jr.Dee, Yuten &amp; NANJAMAN)</span> <span class="t-sep">—</span> <span class="t-artist">Youth of Roots</span></li>
+              <li><span class="t-title">海へ featuring NANJAMAN</span> <span class="t-sep">—</span> <span class="t-artist">MOOMIN</span></li>
+              <li><span class="t-title">Budy Bye</span> <span class="t-sep">—</span> <span class="t-artist">JOHNNY OSBOURNE</span></li>
+              <li><span class="t-title">Always On My Mind</span> <span class="t-sep">—</span> <span class="t-artist">DA&#x27;VILLE</span></li>
+              <li><span class="t-title">You Don&#x27;t Know My Name-Will You Ever Know It (Reggae Mix)</span> <span class="t-sep">—</span> <span class="t-artist">Alicia Keys</span></li>
+              <li><span class="t-title">a song dedicated</span> <span class="t-sep">—</span> <span class="t-artist">PUSHIM</span></li>
+              <li><span class="t-title">だきしめたいよ (feat. HIMI)</span> <span class="t-sep">—</span> <span class="t-artist">LAGHEADS</span></li>
+              <li><span class="t-title">Cherry</span> <span class="t-sep">—</span> <span class="t-artist">SUKISHA</span></li>
+              <li><span class="t-title">Breakup Season (feat. Samm Henshaw)</span> <span class="t-sep">—</span> <span class="t-artist">Maya Delilah</span></li>
+              <li><span class="t-title">Dilemma</span> <span class="t-sep">—</span> <span class="t-artist">Nelly Feat. Kelly Rowland</span></li>
+              <li><span class="t-title">It&#x27;s Gonna Be Alright</span> <span class="t-sep">—</span> <span class="t-artist">Frank McComb &amp; DJ Spinna</span></li>
+              <li><span class="t-title">雨</span> <span class="t-sep">—</span> <span class="t-artist">siki</span></li>
+              <li><span class="t-title">Tomorrow (A Better You, Better Me) [feat. Tevin Campbell]</span> <span class="t-sep">—</span> <span class="t-artist">Quincy Jones</span></li>
+              <li><span class="t-title">Plastic Smile</span> <span class="t-sep">—</span> <span class="t-artist">Sylvia Tella</span></li>
+              <li><span class="t-title">From Distance</span> <span class="t-sep">—</span> <span class="t-artist">RYO the SKYWALKER</span></li>
+              <li><span class="t-title">The World&#x27;s Greatest</span> <span class="t-sep">—</span> <span class="t-artist">Terry Linen</span></li>
+              <li><span class="t-title">Be Alright</span> <span class="t-sep">—</span> <span class="t-artist">Zapp</span></li>
+            </ol>
+          </details>
+        </div>
       </div>
 
-      <div class="mix-item" data-category="music">
+            <div class="mix-item" data-category="music">
         <a href="https://youtu.be/hIrLwy6Nark" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/music7.jpg" alt="Diggin' on Music 7" loading="lazy"></div>
           <div class="mix-info">
@@ -489,9 +1230,38 @@
             <p class="mix-sub">Diggin' on Music</p>
           </div>
         </a>
+        <div class="mix-actions">
+          <details class="tracklist-details" name="mix-tracklist">
+            <summary class="tracklist-toggle">Tracklist</summary>
+            <ol class="tracklist-list">
+              <li><span class="t-title">Lovin&#x27; You</span> <span class="t-sep">—</span> <span class="t-artist">Minnie Riperton</span></li>
+              <li><span class="t-title">All My Life</span> <span class="t-sep">—</span> <span class="t-artist">K-Ci&amp;JoJo</span></li>
+              <li><span class="t-title">Young Dumb &amp; Broke</span> <span class="t-sep">—</span> <span class="t-artist">Khalid</span></li>
+              <li><span class="t-title">Higher</span> <span class="t-sep">—</span> <span class="t-artist">D&#x27;Angelo</span></li>
+              <li><span class="t-title">Tell Me It&#x27;s Real</span> <span class="t-sep">—</span> <span class="t-artist">K-Ci&amp;JoJo</span></li>
+              <li><span class="t-title">tokyo (feat. 鈴木真海子, Skaai)</span> <span class="t-sep">—</span> <span class="t-artist">yonawo</span></li>
+              <li><span class="t-title">A Feeling Is</span> <span class="t-sep">—</span> <span class="t-artist">The Emotions</span></li>
+              <li><span class="t-title">No Matter What</span> <span class="t-sep">—</span> <span class="t-artist">Aretha Franklin</span></li>
+              <li><span class="t-title">Skyline</span> <span class="t-sep">—</span> <span class="t-artist">FKJ</span></li>
+              <li><span class="t-title">Love Galore (feat. Travis Scott)</span> <span class="t-sep">—</span> <span class="t-artist">SZA</span></li>
+              <li><span class="t-title">Still On Journey -Interlude-</span> <span class="t-sep">—</span> <span class="t-artist">RYO the SKYWALKER</span></li>
+              <li><span class="t-title">プライベート サーファー(puff fishy mix)</span> <span class="t-sep">—</span> <span class="t-artist">UA</span></li>
+              <li><span class="t-title">夢で逢えたら (DRY &amp; HEAVY REMIX)</span> <span class="t-sep">—</span> <span class="t-artist">KEYCO</span></li>
+              <li><span class="t-title">I pray</span> <span class="t-sep">—</span> <span class="t-artist">PUSHIM</span></li>
+              <li><span class="t-title">Less Than Three</span> <span class="t-sep">—</span> <span class="t-artist">((( O )))</span></li>
+              <li><span class="t-title">GO WILD</span> <span class="t-sep">—</span> <span class="t-artist">DJ MOTIVE</span></li>
+              <li><span class="t-title">Never Change (feat. Ledisi &amp; Philip Bailey)</span> <span class="t-sep">—</span> <span class="t-artist">BJ the Chicago Kid</span></li>
+              <li><span class="t-title">Is It Good to You</span> <span class="t-sep">—</span> <span class="t-artist">The Whispers</span></li>
+              <li><span class="t-title">And Don&#x27;t You Say No</span> <span class="t-sep">—</span> <span class="t-artist">Roy Ayers</span></li>
+              <li><span class="t-title">Shoot The Moon</span> <span class="t-sep">—</span> <span class="t-artist">Norah Jones</span></li>
+              <li><span class="t-title">At Your Best (You Are Love)</span> <span class="t-sep">—</span> <span class="t-artist">Aaliyah</span></li>
+              <li><span class="t-title">By Your Side</span> <span class="t-sep">—</span> <span class="t-artist">Sade</span></li>
+            </ol>
+          </details>
+        </div>
       </div>
 
-      <div class="mix-item" data-category="music">
+            <div class="mix-item" data-category="music">
         <a href="https://youtu.be/sgOWG2ORH70" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/music6.png" alt="Diggin' on Music 6" loading="lazy"></div>
           <div class="mix-info">
@@ -499,9 +1269,44 @@
             <p class="mix-sub">Diggin' on Music</p>
           </div>
         </a>
+        <div class="mix-actions">
+          <details class="tracklist-details" name="mix-tracklist">
+            <summary class="tracklist-toggle">Tracklist</summary>
+            <ol class="tracklist-list">
+              <li><span class="t-title">Soul Flower (Remix)</span> <span class="t-sep">—</span> <span class="t-artist">The Pharcyde</span></li>
+              <li><span class="t-title">Time to Party</span> <span class="t-sep">—</span> <span class="t-artist">Craig David</span></li>
+              <li><span class="t-title">Let&#x27;s Get Down (feat. DJ Quik)</span> <span class="t-sep">—</span> <span class="t-artist">Tony! Toni! Tone!</span></li>
+              <li><span class="t-title">Give U My Heart (feat. Babyface)</span> <span class="t-sep">—</span> <span class="t-artist">Toni Braxton</span></li>
+              <li><span class="t-title">It&#x27;s My Turn</span> <span class="t-sep">—</span> <span class="t-artist">Stezo</span></li>
+              <li><span class="t-title">Don&#x27;t Sweat the Technique</span> <span class="t-sep">—</span> <span class="t-artist">Eric B. &amp; Rakim</span></li>
+              <li><span class="t-title">Party Groove</span> <span class="t-sep">—</span> <span class="t-artist">Showbiz &amp; A.G.</span></li>
+              <li><span class="t-title">Joy and Pain</span> <span class="t-sep">—</span> <span class="t-artist">Maze &amp; Frankie Beverly</span></li>
+              <li><span class="t-title">More Than A Woman</span> <span class="t-sep">—</span> <span class="t-artist">Bee Gees</span></li>
+              <li><span class="t-title">BIRDS OF A FEATHER</span> <span class="t-sep">—</span> <span class="t-artist">Billie Eilish</span></li>
+              <li><span class="t-title">Full Moon (Soulchild remix)</span> <span class="t-sep">—</span> <span class="t-artist">Brandy</span></li>
+              <li><span class="t-title">ASH feat. Vaundy</span> <span class="t-sep">—</span> <span class="t-artist">Nulbarich</span></li>
+              <li><span class="t-title">In Touch (feat. Charli Taft)</span> <span class="t-sep">—</span> <span class="t-artist">Daul</span></li>
+              <li><span class="t-title">Hooked on You</span> <span class="t-sep">—</span> <span class="t-artist">Cerrone</span></li>
+              <li><span class="t-title">Joanna</span> <span class="t-sep">—</span> <span class="t-artist">Kool &amp; The Gang</span></li>
+              <li><span class="t-title">My Girl</span> <span class="t-sep">—</span> <span class="t-artist">Kan Sano</span></li>
+              <li><span class="t-title">Somebody’s Son (feat. Brandy)</span> <span class="t-sep">—</span> <span class="t-artist">Tiwa Savage</span></li>
+              <li><span class="t-title">Just the Way You Are</span> <span class="t-sep">—</span> <span class="t-artist">Bruno Mars</span></li>
+              <li><span class="t-title">FANTASY</span> <span class="t-sep">—</span> <span class="t-artist">TENDRE</span></li>
+              <li><span class="t-title">Upside Down (feat. Lorraine Smith)</span> <span class="t-sep">—</span> <span class="t-artist">K-Gee</span></li>
+              <li><span class="t-title">I&#x27;m Coming Out</span> <span class="t-sep">—</span> <span class="t-artist">Amerie</span></li>
+              <li><span class="t-title">I Got My Mind Made Up (You Can Get It Girl 7&#x27; Version)</span> <span class="t-sep">—</span> <span class="t-artist">Instant Funk</span></li>
+              <li><span class="t-title">Falling for You</span> <span class="t-sep">—</span> <span class="t-artist">Tamia</span></li>
+              <li><span class="t-title">Betcha&#x27;ll Never Find</span> <span class="t-sep">—</span> <span class="t-artist">Savage</span></li>
+              <li><span class="t-title">Because of You</span> <span class="t-sep">—</span> <span class="t-artist">Ne-Yo</span></li>
+              <li><span class="t-title">What Lovers Do (feat. SZA)</span> <span class="t-sep">—</span> <span class="t-artist">Maroon 5</span></li>
+              <li><span class="t-title">Skate</span> <span class="t-sep">—</span> <span class="t-artist">Silk Sonic, Bruno Mars &amp; Anderson .Paak</span></li>
+              <li><span class="t-title">Let Me Turn You On</span> <span class="t-sep">—</span> <span class="t-artist">Biz Markie</span></li>
+            </ol>
+          </details>
+        </div>
       </div>
 
-      <div class="mix-item" data-category="music">
+            <div class="mix-item" data-category="music">
         <a href="https://youtu.be/K75qO5tbBtM" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/music4.png" alt="Diggin' on Music 4" loading="lazy"></div>
           <div class="mix-info">
@@ -509,9 +1314,46 @@
             <p class="mix-sub">Diggin' on Music</p>
           </div>
         </a>
+        <div class="mix-actions">
+          <details class="tracklist-details" name="mix-tracklist">
+            <summary class="tracklist-toggle">Tracklist</summary>
+            <ol class="tracklist-list">
+              <li><span class="t-title">Game Over (Featuring Mayer Hawthorne)</span> <span class="t-sep">—</span> <span class="t-artist">Bobby Caldwell &amp; Jack Splash</span></li>
+              <li><span class="t-title">Talk (feat. Disclosure)</span> <span class="t-sep">—</span> <span class="t-artist">Khalid</span></li>
+              <li><span class="t-title">luther</span> <span class="t-sep">—</span> <span class="t-artist">Kendrick Lamar &amp; SZA</span></li>
+              <li><span class="t-title">Thinkin Bout You</span> <span class="t-sep">—</span> <span class="t-artist">Frank Ocean</span></li>
+              <li><span class="t-title">We Belong Together</span> <span class="t-sep">—</span> <span class="t-artist">Mariah Carey</span></li>
+              <li><span class="t-title">Sunrise</span> <span class="t-sep">—</span> <span class="t-artist">George Duke</span></li>
+              <li><span class="t-title">Résumé</span> <span class="t-sep">—</span> <span class="t-artist">Jenevieve</span></li>
+              <li><span class="t-title">Urban Jazz</span> <span class="t-sep">—</span> <span class="t-artist">IAMDDB</span></li>
+              <li><span class="t-title">New York Eyes</span> <span class="t-sep">—</span> <span class="t-artist">Nicole &amp; Timmy Thomas</span></li>
+              <li><span class="t-title">Daydreaming (feat. Tiffany)</span> <span class="t-sep">—</span> <span class="t-artist">CAM&#x27;RON</span></li>
+              <li><span class="t-title">The Feeling (feat. Jacinto Rhines)</span> <span class="t-sep">—</span> <span class="t-artist">Blu &amp; Exile, Blu &amp; Exile</span></li>
+              <li><span class="t-title">High Noon</span> <span class="t-sep">—</span> <span class="t-artist">Kota the Friend &amp; Statik Selektah</span></li>
+              <li><span class="t-title">Wavelet</span> <span class="t-sep">—</span> <span class="t-artist">春野</span></li>
+              <li><span class="t-title">good day (feat. MONJU, ISSUGI, 仙人掌 &amp; Mr.PUG)</span> <span class="t-sep">—</span> <span class="t-artist">Kojoe</span></li>
+              <li><span class="t-title">Down for This</span> <span class="t-sep">—</span> <span class="t-artist">Sam Gouthro</span></li>
+              <li><span class="t-title">Love Goes</span> <span class="t-sep">—</span> <span class="t-artist">Mayer Hawthorne</span></li>
+              <li><span class="t-title">Song Cry</span> <span class="t-sep">—</span> <span class="t-artist">JAY-Z</span></li>
+              <li><span class="t-title">Dead Presidents II</span> <span class="t-sep">—</span> <span class="t-artist">JAY-Z</span></li>
+              <li><span class="t-title">Rewind feat. ZORN</span> <span class="t-sep">—</span> <span class="t-artist">OZROSAURUS</span></li>
+              <li><span class="t-title">ゆれる feat. 田我流</span> <span class="t-sep">—</span> <span class="t-artist">EVISBEATS</span></li>
+              <li><span class="t-title">Cold Stone Jazz</span> <span class="t-sep">—</span> <span class="t-artist">Bulljun</span></li>
+              <li><span class="t-title">I Got a Love</span> <span class="t-sep">—</span> <span class="t-artist">Pete Rock &amp; C.L. Smooth</span></li>
+              <li><span class="t-title">All I Know</span> <span class="t-sep">—</span> <span class="t-artist">Rahzel</span></li>
+              <li><span class="t-title">Go</span> <span class="t-sep">—</span> <span class="t-artist">Vanilla</span></li>
+              <li><span class="t-title">Tell Me (feat. D&#x27;Angelo)</span> <span class="t-sep">—</span> <span class="t-artist">Slum Village</span></li>
+              <li><span class="t-title">Finish Line - Drown (feat. T-Pain, Kirk Franklin, Eryn Allen Kane &amp; Noname)</span> <span class="t-sep">—</span> <span class="t-artist">Chance the Rapper</span></li>
+              <li><span class="t-title">Do You Love Me</span> <span class="t-sep">—</span> <span class="t-artist">Claudia Campagnol</span></li>
+              <li><span class="t-title">You Gotta Be (Love Will Save the Day)</span> <span class="t-sep">—</span> <span class="t-artist">Des&#x27;ree</span></li>
+              <li><span class="t-title">Star</span> <span class="t-sep">—</span> <span class="t-artist">Brigette</span></li>
+              <li><span class="t-title">Still Not a Player</span> <span class="t-sep">—</span> <span class="t-artist">Unwrapped</span></li>
+            </ol>
+          </details>
+        </div>
       </div>
 
-      <div class="mix-item" data-category="music">
+            <div class="mix-item" data-category="music">
         <a href="https://youtu.be/pK5hDRq7gMc" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/music3.png" alt="Diggin' on Music 3" loading="lazy"></div>
           <div class="mix-info">
@@ -519,9 +1361,47 @@
             <p class="mix-sub">Diggin' on Music</p>
           </div>
         </a>
+        <div class="mix-actions">
+          <details class="tracklist-details" name="mix-tracklist">
+            <summary class="tracklist-toggle">Tracklist</summary>
+            <ol class="tracklist-list">
+              <li><span class="t-title">Sunday Morning (Questlove Remix)</span> <span class="t-sep">—</span> <span class="t-artist">Maroon 5</span></li>
+              <li><span class="t-title">Sunday feat.ケンチンミン</span> <span class="t-sep">—</span> <span class="t-artist">pinoko</span></li>
+              <li><span class="t-title">I Ain&#x27;t Finished Yet</span> <span class="t-sep">—</span> <span class="t-artist">KinKai, Shuko &amp; Nia Wyn</span></li>
+              <li><span class="t-title">ヒコの休日</span> <span class="t-sep">—</span> <span class="t-artist">Bulljun</span></li>
+              <li><span class="t-title">Grown Man Sport</span> <span class="t-sep">—</span> <span class="t-artist">Pete Rock &amp; InI</span></li>
+              <li><span class="t-title">Gameplan</span> <span class="t-sep">—</span> <span class="t-artist">Lord Finesse</span></li>
+              <li><span class="t-title">Memory Lane (Sittin&#x27; in da Park)</span> <span class="t-sep">—</span> <span class="t-artist">Nas</span></li>
+              <li><span class="t-title">Remind Me</span> <span class="t-sep">—</span> <span class="t-artist">Butcher Brown &amp; Alex Isley</span></li>
+              <li><span class="t-title">Tripping Out</span> <span class="t-sep">—</span> <span class="t-artist">Curtis Mayfield</span></li>
+              <li><span class="t-title">Ain&#x27;t That Just The Way (Baby Bud Mix)</span> <span class="t-sep">—</span> <span class="t-artist">Lutricia McNeal</span></li>
+              <li><span class="t-title">Remind Me</span> <span class="t-sep">—</span> <span class="t-artist">45trio</span></li>
+              <li><span class="t-title">I Wanna Be Yours</span> <span class="t-sep">—</span> <span class="t-artist">Trellini</span></li>
+              <li><span class="t-title">Human Nature</span> <span class="t-sep">—</span> <span class="t-artist">Michael Jackson</span></li>
+              <li><span class="t-title">New Day (feat. Sweet William)</span> <span class="t-sep">—</span> <span class="t-artist">kiki vivi lily</span></li>
+              <li><span class="t-title">supermarket</span> <span class="t-sep">—</span> <span class="t-artist">TOKYO HEALTH CLUB</span></li>
+              <li><span class="t-title">Okiedokie</span> <span class="t-sep">—</span> <span class="t-artist">Funkmammoth</span></li>
+              <li><span class="t-title">Just a Step from Heaven (Frankie Foncett &#x27;Main&#x27; Mix)</span> <span class="t-sep">—</span> <span class="t-artist">Eternal</span></li>
+              <li><span class="t-title">Juicy Fruit</span> <span class="t-sep">—</span> <span class="t-artist">Mtume</span></li>
+              <li><span class="t-title">Juicy (2005 Remaster)</span> <span class="t-sep">—</span> <span class="t-artist">The Notorious B.I.G.</span></li>
+              <li><span class="t-title">JUICY 2023</span> <span class="t-sep">—</span> <span class="t-artist">BAKU, 鎮座DOPENESS &amp; CHAN-MIKA</span></li>
+              <li><span class="t-title">Midnight Dreamin&#x27; (feat. SALU &amp; SIRUP)</span> <span class="t-sep">—</span> <span class="t-artist">DJ HASEBE</span></li>
+              <li><span class="t-title">flash</span> <span class="t-sep">—</span> <span class="t-artist">chelmico</span></li>
+              <li><span class="t-title">Goody Goody (Hip Hop Mix)</span> <span class="t-sep">—</span> <span class="t-artist">Lisette Melendez &amp; Greg Nice</span></li>
+              <li><span class="t-title">Waterfall (feat. VIGORMAN) [Remix]</span> <span class="t-sep">—</span> <span class="t-artist">Mion</span></li>
+              <li><span class="t-title">Summer Time</span> <span class="t-sep">—</span> <span class="t-artist">Vybz Kartel</span></li>
+              <li><span class="t-title">Pon Di Cocky</span> <span class="t-sep">—</span> <span class="t-artist">Aidonia</span></li>
+              <li><span class="t-title">Juggernaut</span> <span class="t-sep">—</span> <span class="t-artist">Alkaline</span></li>
+              <li><span class="t-title">I Don&#x27;t Care (Chronixx &amp; Koffee Remix)</span> <span class="t-sep">—</span> <span class="t-artist">Ed Sheeran &amp; Justin Bieber</span></li>
+              <li><span class="t-title">Confidence</span> <span class="t-sep">—</span> <span class="t-artist">RAYE, Maleek Berry &amp; Nana Rogues</span></li>
+              <li><span class="t-title">One Dance (feat. Wizkid &amp; Kyla)</span> <span class="t-sep">—</span> <span class="t-artist">Drake</span></li>
+              <li><span class="t-title">Touch The Sky (Quinoa Jones Edit)</span> <span class="t-sep">—</span> <span class="t-artist">Kanye West</span></li>
+            </ol>
+          </details>
+        </div>
       </div>
 
-      <div class="mix-item" data-category="music">
+            <div class="mix-item" data-category="music">
         <a href="https://youtu.be/DBkBzlaeEGM" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/music2.png" alt="Diggin' on Music 2" loading="lazy"></div>
           <div class="mix-info">
@@ -529,9 +1409,46 @@
             <p class="mix-sub">Diggin' on Music</p>
           </div>
         </a>
+        <div class="mix-actions">
+          <details class="tracklist-details" name="mix-tracklist">
+            <summary class="tracklist-toggle">Tracklist</summary>
+            <ol class="tracklist-list">
+              <li><span class="t-title">Be (Intro)</span> <span class="t-sep">—</span> <span class="t-artist">Common</span></li>
+              <li><span class="t-title">R-e-s-u-r-r-e-c-t-i-o-n (Re’20)</span> <span class="t-sep">—</span> <span class="t-artist">grooveman Spot</span></li>
+              <li><span class="t-title">Props Over Here</span> <span class="t-sep">—</span> <span class="t-artist">The Beatnuts</span></li>
+              <li><span class="t-title">In the Flesh</span> <span class="t-sep">—</span> <span class="t-artist">Pete Rock &amp; C.L. Smooth</span></li>
+              <li><span class="t-title">The Field</span> <span class="t-sep">—</span> <span class="t-artist">Sound Providers</span></li>
+              <li><span class="t-title">Back In the Day</span> <span class="t-sep">—</span> <span class="t-artist">Erykah Badu</span></li>
+              <li><span class="t-title">All Night Long (feat. Erykah Badu)</span> <span class="t-sep">—</span> <span class="t-artist">Common</span></li>
+              <li><span class="t-title">Mary Jane (All Night Long)</span> <span class="t-sep">—</span> <span class="t-artist">Mary J. Blige</span></li>
+              <li><span class="t-title">Bone 2 Pic (Wit&#x27; &#x27;U)</span> <span class="t-sep">—</span> <span class="t-artist">Angie Stone</span></li>
+              <li><span class="t-title">It’s Over feat J.Smith (Re’20)</span> <span class="t-sep">—</span> <span class="t-artist">grooveman Spot</span></li>
+              <li><span class="t-title">Hold on</span> <span class="t-sep">—</span> <span class="t-artist">showmore &amp; Gimgigam</span></li>
+              <li><span class="t-title">Wandering</span> <span class="t-sep">—</span> <span class="t-artist">iri</span></li>
+              <li><span class="t-title">Got &#x27;Til It&#x27;s Gone (feat. Q-Tip &amp; Joni Mitchell)</span> <span class="t-sep">—</span> <span class="t-artist">Janet Jackson</span></li>
+              <li><span class="t-title">Big Yellow Taxi (Radio Mix)</span> <span class="t-sep">—</span> <span class="t-artist">Joni Mitchell</span></li>
+              <li><span class="t-title">Best life</span> <span class="t-sep">—</span> <span class="t-artist">iri</span></li>
+              <li><span class="t-title">life hack</span> <span class="t-sep">—</span> <span class="t-artist">Vaundy</span></li>
+              <li><span class="t-title">FAR AWAY II (feat. A Boogie wit da Hoodie &amp; JID)</span> <span class="t-sep">—</span> <span class="t-artist">Jessie Reyez</span></li>
+              <li><span class="t-title">On One (feat. Freddie Gibbs)</span> <span class="t-sep">—</span> <span class="t-artist">Joyce Wrice</span></li>
+              <li><span class="t-title">Coffee &amp; Clouds</span> <span class="t-sep">—</span> <span class="t-artist">Fabich &amp; Fika</span></li>
+              <li><span class="t-title">Where I Wanna Be Boy</span> <span class="t-sep">—</span> <span class="t-artist">M.Jones</span></li>
+              <li><span class="t-title">Return of the Mack (C&amp;J Extended Mix)</span> <span class="t-sep">—</span> <span class="t-artist">Mark Morrison</span></li>
+              <li><span class="t-title">Open Your Eyes</span> <span class="t-sep">—</span> <span class="t-artist">Bobby Caldwell</span></li>
+              <li><span class="t-title">The Light</span> <span class="t-sep">—</span> <span class="t-artist">Common</span></li>
+              <li><span class="t-title">The Light</span> <span class="t-sep">—</span> <span class="t-artist">Unwrapped</span></li>
+              <li><span class="t-title">Because I Got a Girl</span> <span class="t-sep">—</span> <span class="t-artist">Nate Dogg</span></li>
+              <li><span class="t-title">I Wanna Thank Ya (Radio Edit) [feat. Snoop Dogg]</span> <span class="t-sep">—</span> <span class="t-artist">Angie Stone</span></li>
+              <li><span class="t-title">I May Be Single (Ocean Breeze Mix)</span> <span class="t-sep">—</span> <span class="t-artist">Elisha La&#x27;Verne</span></li>
+              <li><span class="t-title">LOVE RAIN~恋の雨~(松尾潔リミックス) [Matuokiyosi Remix]</span> <span class="t-sep">—</span> <span class="t-artist">久保田利伸</span></li>
+              <li><span class="t-title">Plastic Love</span> <span class="t-sep">—</span> <span class="t-artist">Friday Night Plans</span></li>
+              <li><span class="t-title">TOKYO</span> <span class="t-sep">—</span> <span class="t-artist">Nulbarich</span></li>
+            </ol>
+          </details>
+        </div>
       </div>
 
-      <div class="mix-item" data-category="music">
+            <div class="mix-item" data-category="music">
         <a href="https://youtu.be/rreevC2501E" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/music1.png" alt="Diggin' on Music 1" loading="lazy"></div>
           <div class="mix-info">
@@ -539,9 +1456,46 @@
             <p class="mix-sub">Diggin' on Music</p>
           </div>
         </a>
+        <div class="mix-actions">
+          <details class="tracklist-details" name="mix-tracklist">
+            <summary class="tracklist-toggle">Tracklist</summary>
+            <ol class="tracklist-list">
+              <li><span class="t-title">The Lord Giveth and the Lord Taketh Away</span> <span class="t-sep">—</span> <span class="t-artist">Marlena Shaw</span></li>
+              <li><span class="t-title">Cruisin&#x27; (Cut The Sax Remix)</span> <span class="t-sep">—</span> <span class="t-artist">D&#x27;Angelo</span></li>
+              <li><span class="t-title">Nothing Better Than You (feat. Erika Scherlin &amp; Anna Fondi)</span> <span class="t-sep">—</span> <span class="t-artist">Papik &amp; The Soultrend Orchestra</span></li>
+              <li><span class="t-title">Smile</span> <span class="t-sep">—</span> <span class="t-artist">The Ray Mann Three</span></li>
+              <li><span class="t-title">What You Won&#x27;t Do For Love</span> <span class="t-sep">—</span> <span class="t-artist">Bobby Caldwell</span></li>
+              <li><span class="t-title">Between the Sheets</span> <span class="t-sep">—</span> <span class="t-artist">The Isley Brothers</span></li>
+              <li><span class="t-title">Big Poppa (2005 Remaster)</span> <span class="t-sep">—</span> <span class="t-artist">The Notorious B.I.G.</span></li>
+              <li><span class="t-title">Love Junkee (feat. Cameo)</span> <span class="t-sep">—</span> <span class="t-artist">DJ Cam</span></li>
+              <li><span class="t-title">Deeper Vibration</span> <span class="t-sep">—</span> <span class="t-artist">Mayer Hawthorne</span></li>
+              <li><span class="t-title">Horizon</span> <span class="t-sep">—</span> <span class="t-artist">Alfred Beach Sandal + STUTS</span></li>
+              <li><span class="t-title">ほんとは feat. Kan Sano</span> <span class="t-sep">—</span> <span class="t-artist">Shin Sakiura</span></li>
+              <li><span class="t-title">Can you see it feat. J.Lamotta Suzume</span> <span class="t-sep">—</span> <span class="t-artist">EVISBEATS, Nagipan</span></li>
+              <li><span class="t-title">Believe in Me</span> <span class="t-sep">—</span> <span class="t-artist">Flamingosis</span></li>
+              <li><span class="t-title">Missing My Love (feat. Fortafy)</span> <span class="t-sep">—</span> <span class="t-artist">Donell Lewis</span></li>
+              <li><span class="t-title">I Want You (feat. After 7)</span> <span class="t-sep">—</span> <span class="t-artist">Babyface</span></li>
+              <li><span class="t-title">One of Those Days</span> <span class="t-sep">—</span> <span class="t-artist">Whitney Houston</span></li>
+              <li><span class="t-title">Luv (sic) pt2</span> <span class="t-sep">—</span> <span class="t-artist">Nujabes</span></li>
+              <li><span class="t-title">Give It Up, Turn It Loose (Kevin&#x27;s Extended R&amp;B Mix) [2022 Remaster]</span> <span class="t-sep">—</span> <span class="t-artist">En Vogue</span></li>
+              <li><span class="t-title">Short Court Style</span> <span class="t-sep">—</span> <span class="t-artist">Natalie Prass</span></li>
+              <li><span class="t-title">Out of Time</span> <span class="t-sep">—</span> <span class="t-artist">The Weeknd</span></li>
+              <li><span class="t-title">I Feel It Coming (feat. Daft Punk)</span> <span class="t-sep">—</span> <span class="t-artist">The Weeknd</span></li>
+              <li><span class="t-title">Right Here (Human Nature Duet) [Extended Human Nature Mix]</span> <span class="t-sep">—</span> <span class="t-artist">SWV</span></li>
+              <li><span class="t-title">Check The Vibe</span> <span class="t-sep">—</span> <span class="t-artist">Dred Scott</span></li>
+              <li><span class="t-title">プレイリスト</span> <span class="t-sep">—</span> <span class="t-artist">LIBRO</span></li>
+              <li><span class="t-title">Love (Instrumental)</span> <span class="t-sep">—</span> <span class="t-artist">J Dilla</span></li>
+              <li><span class="t-title">Love (feat. Pharoahe Monch)</span> <span class="t-sep">—</span> <span class="t-artist">J Dilla</span></li>
+              <li><span class="t-title">Thank You</span> <span class="t-sep">—</span> <span class="t-artist">Diana Ross</span></li>
+              <li><span class="t-title">夜風に吹かれて feat. PUNCH&amp;MIGHTY</span> <span class="t-sep">—</span> <span class="t-artist">EVISBEATS</span></li>
+              <li><span class="t-title">(I Wish I Knew How It Would Feel To Be) Free-One (D-Influence Remix)</span> <span class="t-sep">—</span> <span class="t-artist">Lighthouse Family</span></li>
+              <li><span class="t-title">My Cherie Amour</span> <span class="t-sep">—</span> <span class="t-artist">Tony Thompson</span></li>
+            </ol>
+          </details>
+        </div>
       </div>
 
-      <div class="mix-item" data-category="music">
+            <div class="mix-item" data-category="music">
         <a href="https://youtu.be/UcwpbUPa-Zc" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/low-end-voodoo.png" alt="Low-End Voodoo Vibez (R.I.P. D'Angelo)" loading="lazy"></div>
           <div class="mix-info">
@@ -549,6 +1503,31 @@
             <p class="mix-sub">Special Tribute</p>
           </div>
         </a>
+        <div class="mix-actions">
+          <details class="tracklist-details" name="mix-tracklist">
+            <summary class="tracklist-toggle">Tracklist</summary>
+            <ol class="tracklist-list">
+              <li><span class="t-title">Devil&#x27;s Pie (A Cappella)</span> <span class="t-sep">—</span> <span class="t-artist">D&#x27;Angelo</span></li>
+              <li><span class="t-title">Cruisin&#x27; (Dallas Austin Remix)</span> <span class="t-sep">—</span> <span class="t-artist">D&#x27;Angelo</span></li>
+              <li><span class="t-title">Lady (2B3 Shake Dat Ass Mix)</span> <span class="t-sep">—</span> <span class="t-artist">D&#x27;Angelo</span></li>
+              <li><span class="t-title">Brown Sugar (C J Mackintosh Remix Edit)</span> <span class="t-sep">—</span> <span class="t-artist">D&#x27;Angelo</span></li>
+              <li><span class="t-title">Break Ups 2 Make Ups (feat. D&#x27;Angelo)</span> <span class="t-sep">—</span> <span class="t-artist">Method Man</span></li>
+              <li><span class="t-title">Be Here (feat. D&#x27;Angelo)</span> <span class="t-sep">—</span> <span class="t-artist">Raphael Saadiq</span></li>
+              <li><span class="t-title">Left and Right (feat. Redman &amp; Method Man)</span> <span class="t-sep">—</span> <span class="t-artist">D&#x27;Angelo</span></li>
+              <li><span class="t-title">Me and Those Dreamin&#x27; Eyes of Mine (feat. Redman) [Def Squad Remix]</span> <span class="t-sep">—</span> <span class="t-artist">D&#x27;Angelo</span></li>
+              <li><span class="t-title">So Far to Go (feat. Common &amp; D&#x27;Angelo) [Short Edit]</span> <span class="t-sep">—</span> <span class="t-artist">J Dilla</span></li>
+              <li><span class="t-title">Tell Me (feat. D&#x27;Angelo)</span> <span class="t-sep">—</span> <span class="t-artist">Slum Village</span></li>
+              <li><span class="t-title">Playa Playa</span> <span class="t-sep">—</span> <span class="t-artist">D&#x27;Angelo</span></li>
+              <li><span class="t-title">Feel Like Makin&#x27; Love</span> <span class="t-sep">—</span> <span class="t-artist">D&#x27;Angelo</span></li>
+              <li><span class="t-title">The Root</span> <span class="t-sep">—</span> <span class="t-artist">D&#x27;Angelo</span></li>
+              <li><span class="t-title">Really Love</span> <span class="t-sep">—</span> <span class="t-artist">D&#x27;Angelo and The Vanguard</span></li>
+              <li><span class="t-title">Nothing Even Matters (feat. D&#x27;Angelo)</span> <span class="t-sep">—</span> <span class="t-artist">Lauryn Hill</span></li>
+              <li><span class="t-title">Higher</span> <span class="t-sep">—</span> <span class="t-artist">D&#x27;Angelo</span></li>
+              <li><span class="t-title">Send It On</span> <span class="t-sep">—</span> <span class="t-artist">D&#x27;Angelo</span></li>
+              <li><span class="t-title">Untitled (How Does It Feel)</span> <span class="t-sep">—</span> <span class="t-artist">D&#x27;Angelo</span></li>
+            </ol>
+          </details>
+        </div>
       </div>
 
     </main>

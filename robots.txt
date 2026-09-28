@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pondtokyo.github.io/sitemap.xml
