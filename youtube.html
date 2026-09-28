@@ -142,6 +142,50 @@
       header { margin-bottom: 6vh; }
       .mix-grid { gap: 28px; }
     }
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 28px;
+      margin-bottom: 8vh;
+      border-bottom: 1px solid rgba(28,28,26,0.1);
+      padding-bottom: 16px;
+    }
+
+    .filter-btn {
+      background: none;
+      border: none;
+      font-family: inherit;
+      font-size: clamp(0.72rem, 1.1vw, 0.82rem);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      cursor: pointer;
+      padding: 4px 0;
+      position: relative;
+      transition: color 0.3s;
+    }
+
+    .filter-btn:hover {
+      color: var(--text);
+    }
+
+    .filter-btn.active {
+      color: var(--text);
+    }
+
+    .filter-btn.active::after {
+      content: "";
+      position: absolute;
+      bottom: -17px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--text);
+    }
+
+    .mix-item.is-hidden {
+      display: none !important;
+    }
   </style>
 </head>
 <body>
@@ -151,324 +195,331 @@
       <h1>YouTube</h1>
     </header>
 
+    <nav class="filter-bar">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="wax">Diggin' on Wax</button>
+      <button class="filter-btn" data-filter="music">Diggin' on Music</button>
+      <button class="filter-btn" data-filter="corner">Corner</button>
+    </nav>
+
     <main class="mix-grid">
 
-      <div class="mix-item">
+      <div class="mix-item" data-category="wax">
         <a href="https://youtu.be/IcMDd9Op6pQ" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/wax7.jpg" alt=""></div>
           <div class="mix-info">
             <p class="mix-title">Diggin' on Wax vol.7 — Side A</p>
-            <p class="mix-sub">YouTube</p>
+            <p class="mix-sub">Diggin' on Wax</p>
           </div>
         </a>
       </div>
 
-      <div class="mix-item">
+      <div class="mix-item" data-category="wax">
         <a href="https://youtu.be/RJZsLeOSE48" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/wax6.jpg" alt=""></div>
           <div class="mix-info">
             <p class="mix-title">Diggin' on Wax vol.6 — Side B</p>
-            <p class="mix-sub">YouTube</p>
+            <p class="mix-sub">Diggin' on Wax</p>
           </div>
         </a>
       </div>
 
-      <div class="mix-item">
+      <div class="mix-item" data-category="wax">
         <a href="https://youtu.be/wX0iOnAXnro" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/wax6.jpg" alt=""></div>
           <div class="mix-info">
             <p class="mix-title">Diggin' on Wax vol.6 — Side A</p>
-            <p class="mix-sub">YouTube</p>
+            <p class="mix-sub">Diggin' on Wax</p>
           </div>
         </a>
       </div>
 
-      <div class="mix-item">
+      <div class="mix-item" data-category="wax">
         <a href="https://youtu.be/EUHJ1_8k0nU" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/wax5.jpg" alt=""></div>
           <div class="mix-info">
             <p class="mix-title">Diggin' on Wax vol.5 — Side B</p>
-            <p class="mix-sub">YouTube</p>
+            <p class="mix-sub">Diggin' on Wax</p>
           </div>
         </a>
       </div>
 
-      <div class="mix-item">
+      <div class="mix-item" data-category="wax">
         <a href="https://youtu.be/a5Ww-ukogR4" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/wax5.jpg" alt=""></div>
           <div class="mix-info">
             <p class="mix-title">Diggin' on Wax vol.5 — Side A</p>
-            <p class="mix-sub">YouTube</p>
+            <p class="mix-sub">Diggin' on Wax</p>
           </div>
         </a>
       </div>
 
-      <div class="mix-item">
+      <div class="mix-item" data-category="wax">
         <a href="https://youtu.be/jMKgfFImkD0" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/wax4.jpg" alt=""></div>
           <div class="mix-info">
             <p class="mix-title">Diggin' on Wax vol.4 — Side B</p>
-            <p class="mix-sub">YouTube</p>
+            <p class="mix-sub">Diggin' on Wax</p>
           </div>
         </a>
       </div>
 
-      <div class="mix-item">
+      <div class="mix-item" data-category="wax">
         <a href="https://youtu.be/5qk5CK8fGxQ" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/wax4.jpg" alt=""></div>
           <div class="mix-info">
             <p class="mix-title">Diggin' on Wax vol.4 — Side A</p>
-            <p class="mix-sub">YouTube</p>
+            <p class="mix-sub">Diggin' on Wax</p>
           </div>
         </a>
       </div>
 
-      <div class="mix-item">
+      <div class="mix-item" data-category="wax">
         <a href="https://youtu.be/3yL8NUC80SE" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/wax3.jpg" alt=""></div>
           <div class="mix-info">
             <p class="mix-title">Diggin' on Wax vol.3 — Side B</p>
-            <p class="mix-sub">YouTube</p>
+            <p class="mix-sub">Diggin' on Wax</p>
           </div>
         </a>
       </div>
 
-      <div class="mix-item">
+      <div class="mix-item" data-category="wax">
         <a href="https://youtu.be/dDxffoj9fac" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/wax3.jpg" alt=""></div>
           <div class="mix-info">
             <p class="mix-title">Diggin' on Wax vol.3 — Side A</p>
-            <p class="mix-sub">YouTube</p>
+            <p class="mix-sub">Diggin' on Wax</p>
           </div>
         </a>
       </div>
 
-      <div class="mix-item">
+      <div class="mix-item" data-category="wax">
         <a href="https://youtu.be/96cf9rfkR2Q" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/wax2.jpg" alt=""></div>
           <div class="mix-info">
             <p class="mix-title">Diggin' on Wax vol.2 — Side B</p>
-            <p class="mix-sub">YouTube</p>
+            <p class="mix-sub">Diggin' on Wax</p>
           </div>
         </a>
       </div>
 
-      <div class="mix-item">
+      <div class="mix-item" data-category="wax">
         <a href="https://youtu.be/g4LkAKVkwl4" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/wax2.jpg" alt=""></div>
           <div class="mix-info">
             <p class="mix-title">Diggin' on Wax vol.2 — Side A</p>
-            <p class="mix-sub">YouTube</p>
+            <p class="mix-sub">Diggin' on Wax</p>
           </div>
         </a>
       </div>
 
-      <div class="mix-item">
+      <div class="mix-item" data-category="wax">
         <a href="https://youtu.be/zIz0-ngOwko" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/wax1-sideB.jpg" alt=""></div>
           <div class="mix-info">
             <p class="mix-title">Diggin' on Wax vol.1 — Side B</p>
-            <p class="mix-sub">YouTube</p>
+            <p class="mix-sub">Diggin' on Wax</p>
           </div>
         </a>
       </div>
 
-      <div class="mix-item">
+      <div class="mix-item" data-category="wax">
         <a href="https://youtu.be/8z3E9QRv1Mc" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/wax1-sideA.jpg" alt=""></div>
           <div class="mix-info">
             <p class="mix-title">Diggin' on Wax vol.1 — Side A</p>
-            <p class="mix-sub">YouTube</p>
+            <p class="mix-sub">Diggin' on Wax</p>
           </div>
         </a>
       </div>
 
-      <div class="mix-item">
+      <div class="mix-item" data-category="corner">
         <a href="https://youtu.be/NYIphjxLmHM" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/corner-coffee.png" alt=""></div>
           <div class="mix-info">
             <p class="mix-title">Diggin' on Corner — Sidewalk Coffee</p>
-            <p class="mix-sub">YouTube</p>
+            <p class="mix-sub">Diggin' on Corner</p>
           </div>
         </a>
       </div>
 
-      <div class="mix-item">
+      <div class="mix-item" data-category="music">
         <a href="https://youtu.be/IeuXG6yyk0g" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/music22.png" alt=""></div>
           <div class="mix-info">
             <p class="mix-title">Diggin' on Music 22</p>
-            <p class="mix-sub">YouTube</p>
+            <p class="mix-sub">Diggin' on Music</p>
           </div>
         </a>
       </div>
 
-      <div class="mix-item">
+      <div class="mix-item" data-category="music">
         <a href="https://youtu.be/mRuEyCn7ELE" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/music20.png" alt=""></div>
           <div class="mix-info">
             <p class="mix-title">Diggin' on Music 20</p>
-            <p class="mix-sub">YouTube</p>
+            <p class="mix-sub">Diggin' on Music</p>
           </div>
         </a>
       </div>
 
-      <div class="mix-item">
+      <div class="mix-item" data-category="music">
         <a href="https://youtu.be/spN-EFsR0qM" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/music18.png" alt=""></div>
           <div class="mix-info">
             <p class="mix-title">Diggin' on Music 18</p>
-            <p class="mix-sub">YouTube</p>
+            <p class="mix-sub">Diggin' on Music</p>
           </div>
         </a>
       </div>
 
-      <div class="mix-item">
+      <div class="mix-item" data-category="music">
         <a href="https://youtu.be/UH3K17ODDzg" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/music17.png" alt=""></div>
           <div class="mix-info">
             <p class="mix-title">Diggin' on Music 17</p>
-            <p class="mix-sub">YouTube</p>
+            <p class="mix-sub">Diggin' on Music</p>
           </div>
         </a>
       </div>
 
-      <div class="mix-item">
+      <div class="mix-item" data-category="music">
         <a href="https://youtu.be/XJg13pu1bwE" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/music16.png" alt=""></div>
           <div class="mix-info">
             <p class="mix-title">Diggin' on Music 16</p>
-            <p class="mix-sub">YouTube</p>
+            <p class="mix-sub">Diggin' on Music</p>
           </div>
         </a>
       </div>
 
-      <div class="mix-item">
+      <div class="mix-item" data-category="music">
         <a href="https://youtu.be/Pno7z7Ng9MI" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/music14.png" alt=""></div>
           <div class="mix-info">
             <p class="mix-title">Diggin' on Music 14</p>
-            <p class="mix-sub">YouTube</p>
+            <p class="mix-sub">Diggin' on Music</p>
           </div>
         </a>
       </div>
 
-      <div class="mix-item">
+      <div class="mix-item" data-category="music">
         <a href="https://youtu.be/EzIGOHxFmhw" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/music12.png" alt=""></div>
           <div class="mix-info">
             <p class="mix-title">Diggin' on Music 12</p>
-            <p class="mix-sub">YouTube</p>
+            <p class="mix-sub">Diggin' on Music</p>
           </div>
         </a>
       </div>
 
-      <div class="mix-item">
+      <div class="mix-item" data-category="music">
         <a href="https://youtu.be/4JvmzwvIGfQ" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/music11.png" alt=""></div>
           <div class="mix-info">
             <p class="mix-title">Diggin' on Music 11</p>
-            <p class="mix-sub">YouTube</p>
+            <p class="mix-sub">Diggin' on Music</p>
           </div>
         </a>
       </div>
 
-      <div class="mix-item">
+      <div class="mix-item" data-category="music">
         <a href="https://youtu.be/-XUKefQnKrs" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/music10.png" alt=""></div>
           <div class="mix-info">
             <p class="mix-title">Diggin' on Music 10</p>
-            <p class="mix-sub">YouTube</p>
+            <p class="mix-sub">Diggin' on Music</p>
           </div>
         </a>
       </div>
 
-      <div class="mix-item">
+      <div class="mix-item" data-category="music">
         <a href="https://youtu.be/cTM6qKR2UhU" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/music9.png" alt=""></div>
           <div class="mix-info">
             <p class="mix-title">Diggin' on Music 9</p>
-            <p class="mix-sub">YouTube</p>
+            <p class="mix-sub">Diggin' on Music</p>
           </div>
         </a>
       </div>
 
-      <div class="mix-item">
+      <div class="mix-item" data-category="music">
         <a href="https://youtu.be/4nz56it-oWM" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/music8.jpg" alt=""></div>
           <div class="mix-info">
             <p class="mix-title">Diggin' on Music 8</p>
-            <p class="mix-sub">YouTube</p>
+            <p class="mix-sub">Diggin' on Music</p>
           </div>
         </a>
       </div>
 
-      <div class="mix-item">
+      <div class="mix-item" data-category="music">
         <a href="https://youtu.be/hIrLwy6Nark" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/music7.jpg" alt=""></div>
           <div class="mix-info">
             <p class="mix-title">Diggin' on Music 7</p>
-            <p class="mix-sub">YouTube</p>
+            <p class="mix-sub">Diggin' on Music</p>
           </div>
         </a>
       </div>
 
-      <div class="mix-item">
+      <div class="mix-item" data-category="music">
         <a href="https://youtu.be/sgOWG2ORH70" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/music6.png" alt=""></div>
           <div class="mix-info">
             <p class="mix-title">Diggin' on Music 6</p>
-            <p class="mix-sub">YouTube</p>
+            <p class="mix-sub">Diggin' on Music</p>
           </div>
         </a>
       </div>
 
-      <div class="mix-item">
+      <div class="mix-item" data-category="music">
         <a href="https://youtu.be/K75qO5tbBtM" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/music4.png" alt=""></div>
           <div class="mix-info">
             <p class="mix-title">Diggin' on Music 4</p>
-            <p class="mix-sub">YouTube</p>
+            <p class="mix-sub">Diggin' on Music</p>
           </div>
         </a>
       </div>
 
-      <div class="mix-item">
+      <div class="mix-item" data-category="music">
         <a href="https://youtu.be/pK5hDRq7gMc" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/music3.png" alt=""></div>
           <div class="mix-info">
             <p class="mix-title">Diggin' on Music 3</p>
-            <p class="mix-sub">YouTube</p>
+            <p class="mix-sub">Diggin' on Music</p>
           </div>
         </a>
       </div>
 
-      <div class="mix-item">
+      <div class="mix-item" data-category="music">
         <a href="https://youtu.be/DBkBzlaeEGM" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/music2.png" alt=""></div>
           <div class="mix-info">
             <p class="mix-title">Diggin' on Music 2</p>
-            <p class="mix-sub">YouTube</p>
+            <p class="mix-sub">Diggin' on Music</p>
           </div>
         </a>
       </div>
 
-      <div class="mix-item">
+      <div class="mix-item" data-category="music">
         <a href="https://youtu.be/rreevC2501E" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/music1.png" alt=""></div>
           <div class="mix-info">
             <p class="mix-title">Diggin' on Music 1</p>
-            <p class="mix-sub">YouTube</p>
+            <p class="mix-sub">Diggin' on Music</p>
           </div>
         </a>
       </div>
 
-      <div class="mix-item">
+      <div class="mix-item" data-category="music">
         <a href="https://youtu.be/UcwpbUPa-Zc" target="_blank" rel="noopener">
           <div class="thumbnail"><img src="images/low-end-voodoo.png" alt=""></div>
           <div class="mix-info">
             <p class="mix-title">Low-End Voodoo Vibez (R.I.P. D'Angelo)</p>
-            <p class="mix-sub">YouTube</p>
+            <p class="mix-sub">Special Tribute</p>
           </div>
         </a>
       </div>
@@ -477,5 +528,42 @@
 
     <footer>© POND</footer>
   </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const buttons = document.querySelectorAll('.filter-btn');
+      const items = document.querySelectorAll('.mix-item');
+
+      function setFilter(category) {
+        buttons.forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.filter === category);
+        });
+
+        items.forEach(item => {
+          if (category === 'all' || item.dataset.category === category) {
+            item.classList.remove('is-hidden');
+          } else {
+            item.classList.add('is-hidden');
+          }
+        });
+      }
+
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const filter = btn.dataset.filter;
+          setFilter(filter);
+          if (filter === 'all') {
+            history.replaceState(null, '', window.location.pathname);
+          } else {
+            window.location.hash = filter;
+          }
+        });
+      });
+
+      const hash = window.location.hash.replace('#', '').toLowerCase();
+      if (['wax', 'music', 'corner'].includes(hash)) {
+        setFilter(hash);
+      }
+    });
+  </script>
 </body>
 </html>
